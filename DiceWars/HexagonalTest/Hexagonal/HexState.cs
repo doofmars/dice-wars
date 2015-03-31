@@ -25,9 +25,15 @@ namespace Hexagonal
 
 		public HexState()
 		{
+            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            byte[] data = new byte[8];
+            rng.GetBytes(data);
+            ulong value = BitConverter.ToUInt64(data, 0);
+
             Random rnd = new Random();
-            int colorId = rnd.Next(0, 4);// creates a number between 0 and 3
-            switch (colorId) {
+            int colorId = rnd.Next(0, 8);// creates a number between 0 and 7
+            switch (value % 4)
+            {
                 case 0:
                     this.backgroundColor = Color.Red;
                     break;
@@ -44,6 +50,7 @@ namespace Hexagonal
                 this.backgroundColor = Color.White;
                 break;
             }
+            Console.WriteLine(backgroundColor);
 			
 		}
 

@@ -44,6 +44,7 @@ namespace Hexagonal
 			this.y = y;
 			this.side = side;
 			this.orientation = orientation;
+            Console.WriteLine("new" + x + "da" + y);
 			this.hexState = new HexState();
 			CalculateVertices();
 		}
