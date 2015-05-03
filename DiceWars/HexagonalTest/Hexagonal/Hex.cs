@@ -14,22 +14,24 @@ namespace Hexagonal
 		private Hexagonal.HexOrientation orientation;
 		private float x;
 		private float y;
+        private int gridPosX;
+        private int gridPosY;
 		private HexState hexState;
 	
 		/// <param name="side">length of one side of the hexagon</param>
-		public Hex(int x, int y, int side, Hexagonal.HexOrientation orientation)
+        public Hex(int x, int y, int side, Hexagonal.HexOrientation orientation, int posX, int posY)
 		{
-			Initialize(Hexagonal.Math.ConvertToFloat(x), Hexagonal.Math.ConvertToFloat(y), Hexagonal.Math.ConvertToFloat(side),orientation);
+            Initialize(Hexagonal.Math.ConvertToFloat(x), Hexagonal.Math.ConvertToFloat(y), Hexagonal.Math.ConvertToFloat(side), orientation, posX, posY);
 		}
 
-		public Hex(float x, float y, float side, Hexagonal.HexOrientation orientation)
+        public Hex(float x, float y, float side, Hexagonal.HexOrientation orientation, int posX, int posY)
 		{
-			Initialize(x, y, side, orientation);
+            Initialize(x, y, side, orientation, posX, posY);
 		}
 
-		public Hex(PointF point, float side, HexOrientation orientation)
+		public Hex(PointF point, float side, HexOrientation orientation, int posX, int posY)
 		{
-			Initialize(point.X, point.Y, side, orientation);
+			Initialize(point.X, point.Y, side, orientation, posX, posY);
 		}
 
 		public Hex()
@@ -38,7 +40,7 @@ namespace Hexagonal
 		/// <summary>
 		/// Sets internal fields and calls CalculateVertices()
 		/// </summary>
-		private void Initialize(float x, float y, float side, Hexagonal.HexOrientation orientation)
+        private void Initialize(float x, float y, float side, Hexagonal.HexOrientation orientation, int posX, int posY)
 		{
 			this.x = x;
 			this.y = y;
@@ -46,6 +48,17 @@ namespace Hexagonal
 			this.orientation = orientation;
             Console.WriteLine("new" + x + "da" + y);
 			this.hexState = new HexState();
+            //The IsNeigbour relys on the gridPosition
+            if (orientation == Hexagonal.HexOrientation.Pointy) {
+                this.gridPosX = posX;
+                this.gridPosY = posY;
+            }
+            else
+            {
+                this.gridPosX = posY;
+                this.gridPosY = posX;
+            }
+            
 			CalculateVertices();
 		}
 
@@ -115,6 +128,42 @@ namespace Hexagonal
 			
 		}
 
+        /// <summary>
+        /// Determines if that Hex is the neighbor of this Hex
+		/// </summary>
+        public Boolean IsNeighbor(Hex that)
+        {
+            if(this.Equals(that)){
+                return false;
+            }
+            //Left or right of target
+            if (this.GridPositionY == that.GridPositionY && (this.GridPositionX == that.GridPositionX + 1 || this.GridPositionX == that.GridPositionX - 1))
+            {
+                return true;
+            }
+            //Diagonal
+            if (this.GridPositionX == that.GridPositionX && (this.GridPositionY == that.GridPositionY + 1 || this.GridPositionY == that.GridPositionY - 1))
+            {
+                return true;
+            }
+            //Diagonal the other way, depends on the GridPositionY
+            if (this.GridPositionY % 2 == 0)
+            {
+                if (this.GridPositionX == that.GridPositionX +1 && (this.GridPositionY == that.GridPositionY + 1 || this.GridPositionY == that.GridPositionY - 1))
+                {
+                    return true;
+                }
+            }
+            else
+            {
+                if (this.GridPositionX == that.GridPositionX - 1 && (this.GridPositionY == that.GridPositionY + 1 || this.GridPositionY == that.GridPositionY - 1))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
 		public Hexagonal.HexOrientation Orientation
 		{
 			get
@@ -171,6 +220,30 @@ namespace Hexagonal
 			}
 		}
 
+        public int GridPositionX
+        {
+            get
+            {
+                return gridPosX;
+            }
+            set
+            {
+                gridPosX = value;
+            }
+        }
+
+        public int GridPositionY
+        {
+            get
+            {
+                return gridPosY;
+            }
+            set
+            {
+                gridPosY = value;
+            }
+        }
+
 		public Hexagonal.HexState HexState
 		{
 			get
@@ -182,6 +255,11 @@ namespace Hexagonal
 				throw new System.NotImplementedException();
 			}
 		}
+
+        public override string ToString()
+        {
+            return "Hexagon[ x=" + gridPosX + ", y=" + gridPosY + "]";
+        }
 
 	}
 }

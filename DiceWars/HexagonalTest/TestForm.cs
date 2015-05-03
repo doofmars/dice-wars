@@ -66,12 +66,24 @@ namespace HexagonalTest
 				}
 				else
 				{
-					Console.WriteLine("Hex was clicked.");
-					board.BoardState.ActiveHex = clickedHex;
-					if (e.Button == MouseButtons.Right)
-					{
-						clickedHex.HexState.BackgroundColor = Color.Blue;
-					}
+                    Console.WriteLine("Hex " + clickedHex + " was clicked.");
+                    if (board.BoardState.ActiveHex == null)
+                    {
+                        board.BoardState.ActiveHex = clickedHex;
+                    }
+                        else
+                    {
+                        if (board.BoardState.ActiveHex.IsNeighbor(clickedHex))
+                        {
+                            clickedHex.HexState.BackgroundColor = board.BoardState.ActiveHex.HexState.BackgroundColor;
+                            board.BoardState.ActiveHex = clickedHex;
+                            if (e.Button == MouseButtons.Right)
+                            {
+                                clickedHex.HexState.BackgroundColor = Color.Blue;
+                            }
+                        }
+                    }
+                  
 				}
 
 			}

@@ -292,10 +292,10 @@ namespace Hexagonal
 						switch (orientation)
 						{ 
 							case HexOrientation.Flat:
-								hexes[0, 0] = new Hex(0 + h + xOffset, 0 + yOffset, side, orientation);
+								hexes[0, 0] = new Hex(0 + h + xOffset, 0 + yOffset, side, orientation, 0, 0);
 								break;
 							case HexOrientation.Pointy:
-								hexes[0, 0] = new Hex(0 + r + xOffset, 0 + yOffset, side, orientation);
+                                hexes[0, 0] = new Hex(0 + r + xOffset, 0 + yOffset, side, orientation, 0, 0);
 								break;
 							default:
 								break;
@@ -312,7 +312,7 @@ namespace Hexagonal
 								if (inLeftColumn)
 								{
 									// Calculate from hex above
-									hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.FlatVertice.BottomLeft], side, orientation);
+									hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.FlatVertice.BottomLeft], side, orientation, j, i);
 								}
 								else
 								{
@@ -324,12 +324,12 @@ namespace Hexagonal
 										float y = hexes[i, j - 1].Points[(int)Hexagonal.FlatVertice.UpperRight].Y;
 										x += h;
 										y -= r;
-										hexes[i, j] = new Hex(x, y, side, orientation);
+                                        hexes[i, j] = new Hex(x, y, side, orientation, j, i);
 									}
 									else
 									{
 										// Calculate from Hex to left's Middle Right Vertice
-										hexes[i, j] = new Hex(hexes[i, j - 1].Points[(int)Hexagonal.FlatVertice.MiddleRight], side, orientation);
+                                        hexes[i, j] = new Hex(hexes[i, j - 1].Points[(int)Hexagonal.FlatVertice.MiddleRight], side, orientation, j, i);
 									}
 								}
 								break;
@@ -339,11 +339,11 @@ namespace Hexagonal
 									// Calculate from hex above and need to stagger the rows
 									if (i % 2 == 0)
 									{
-										hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomLeft], side, orientation);
+                                        hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomLeft], side, orientation, j, i);
 									}
 									else
 									{
-										hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomRight], side, orientation);
+                                        hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomRight], side, orientation, j, i);
 									}
 
 								}
@@ -354,7 +354,7 @@ namespace Hexagonal
 									float y = hexes[i, j - 1].Points[(int)Hexagonal.PointyVertice.UpperRight].Y;
 									x += r;
 									y -= h;
-									hexes[i, j] = new Hex(x, y, side, orientation);	
+                                    hexes[i, j] = new Hex(x, y, side, orientation, j, i);	
 								}
 								break;
 							default:
