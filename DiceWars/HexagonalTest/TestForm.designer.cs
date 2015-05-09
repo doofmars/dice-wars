@@ -31,6 +31,7 @@ namespace HexagonalTest
             this.labelXY = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.bt_end = new System.Windows.Forms.Button();
+            this.current_player = new System.Windows.Forms.Panel();
             this.SuspendLayout();
             // 
             // labelXY
@@ -69,11 +70,20 @@ namespace HexagonalTest
             this.bt_end.UseVisualStyleBackColor = true;
             this.bt_end.Click += new System.EventHandler(this.bt_end_Click);
             // 
+            // current_player
+            // 
+            this.current_player.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.current_player.Location = new System.Drawing.Point(726, 68);
+            this.current_player.Name = "current_player";
+            this.current_player.Size = new System.Drawing.Size(65, 65);
+            this.current_player.TabIndex = 12;
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(803, 603);
+            this.Controls.Add(this.current_player);
             this.Controls.Add(this.bt_end);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.labelXY);
@@ -94,5 +104,6 @@ namespace HexagonalTest
         private System.Windows.Forms.Label labelXY;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button bt_end;
+        private System.Windows.Forms.Panel current_player;
 	}
 }

@@ -78,10 +78,15 @@ namespace HexagonalTest
                     if (board.BoardState.ActiveHex == null)
                     {
                         board.BoardState.ActiveHex = clickedHex;
+                        current_player.BackColor = clickedHex.HexState.BackgroundColor;
                     }
                         else
                     {
-                        if (board.BoardState.ActiveHex.IsNeighbor(clickedHex))
+                        if (clickedHex.HexState.BackgroundColor == current_player.BackColor)
+                        {
+                            board.BoardState.ActiveHex = clickedHex;
+                        } 
+                        else if (board.BoardState.ActiveHex.IsNeighbor(clickedHex))
                         {
                             clickedHex.HexState.BackgroundColor = board.BoardState.ActiveHex.HexState.BackgroundColor;
                             board.BoardState.ActiveHex = clickedHex;
