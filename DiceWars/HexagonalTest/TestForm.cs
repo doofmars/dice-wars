@@ -40,7 +40,7 @@ namespace HexagonalTest
                 .build();
 
             this.board = new Builder.BoardBuilder()
-                .witHeight(20)
+                .witHeight(15)
                 .withWidht(15)
                 .withSide(25)
                 .withOrientation(HexOrientation.Pointy)
@@ -128,6 +128,11 @@ namespace HexagonalTest
 				board = null;
 			}
 		}
+
+        private void bt_end_Click(object sender, EventArgs e)
+        {
+
+        }
 
 		
 		

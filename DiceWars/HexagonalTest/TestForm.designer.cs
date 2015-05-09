@@ -30,6 +30,7 @@ namespace HexagonalTest
 		{
             this.labelXY = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
+            this.bt_end = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // labelXY
@@ -38,11 +39,10 @@ namespace HexagonalTest
             this.labelXY.AutoSize = true;
             this.labelXY.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.labelXY.ForeColor = System.Drawing.Color.Blue;
-            this.labelXY.Location = new System.Drawing.Point(816, 27);
-            this.labelXY.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.labelXY.Location = new System.Drawing.Point(723, 22);
             this.labelXY.Name = "labelXY";
             this.labelXY.RightToLeft = System.Windows.Forms.RightToLeft.No;
-            this.labelXY.Size = new System.Drawing.Size(52, 17);
+            this.labelXY.Size = new System.Drawing.Size(41, 13);
             this.labelXY.TabIndex = 1;
             this.labelXY.Text = "label1";
             this.labelXY.TextAlign = System.Drawing.ContentAlignment.MiddleLeft;
@@ -52,22 +52,32 @@ namespace HexagonalTest
             this.label4.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(816, 11);
-            this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label4.Location = new System.Drawing.Point(723, 9);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(85, 17);
+            this.label4.Size = new System.Drawing.Size(68, 13);
             this.label4.TabIndex = 10;
             this.label4.Text = "Mouse X,Y";
             // 
+            // bt_end
+            // 
+            this.bt_end.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.bt_end.Location = new System.Drawing.Point(726, 38);
+            this.bt_end.Name = "bt_end";
+            this.bt_end.Size = new System.Drawing.Size(65, 23);
+            this.bt_end.TabIndex = 11;
+            this.bt_end.Text = "End Turn";
+            this.bt_end.UseVisualStyleBackColor = true;
+            this.bt_end.Click += new System.EventHandler(this.bt_end_Click);
+            // 
             // TestForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(923, 676);
+            this.ClientSize = new System.Drawing.Size(803, 603);
+            this.Controls.Add(this.bt_end);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.labelXY);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "TestForm";
             this.Text = "TestForm";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form_Closing);
@@ -83,5 +93,6 @@ namespace HexagonalTest
 
         private System.Windows.Forms.Label labelXY;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button bt_end;
 	}
 }
