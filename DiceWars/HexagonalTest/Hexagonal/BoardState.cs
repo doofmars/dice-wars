@@ -89,14 +89,14 @@ namespace Hexagonal
 		}
 		#endregion
 
-		public BoardState()
+        public BoardState(Color backgroundColor, Color gridColor, int gridPenWidth, Color activeHexBorderColor, int activeHexBorderWidth)
 		{
-			backgroundColor = Color.White;
-			gridColor = Color.Black;
-			gridPenWidth = 1;
-			activeHex = null;
-			activeHexBorderColor = Color.Blue;
-			activeHexBorderWidth = 1;
+            this.backgroundColor = backgroundColor;
+            this.gridColor = gridColor;
+            this.gridPenWidth = gridPenWidth;
+			this.activeHex = null;
+            this.activeHexBorderColor = activeHexBorderColor;
+            this.activeHexBorderWidth = activeHexBorderWidth;
 		}
 	}
 }

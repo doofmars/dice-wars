@@ -15,30 +15,12 @@ namespace Hexagonal
 		private int xOffset;
 		private int yOffset;
 		private int side;
-		private float pixelWidth;
-		private float pixelHeight;
 		private Hexagonal.HexOrientation orientation;
 		private System.Drawing.Color backgroundColor;
 		private Hexagonal.BoardState boardState;
-		/// <param name="width">Board width</param>
-		/// <param name="height">Board height</param>
-		/// <param name="side">Hexagon side length</param>
-		/// <param name="orientation">Orientation of the hexagons</param>
-		public Board(int width, int height, int side, Hexagonal.HexOrientation orientation)
-		{
-			Initialize(width, height, side, orientation, 0, 0);
-		}
 
-		/// <param name="width">Board width</param>
-		/// <param name="height">Board height</param>
-		/// <param name="side">Hexagon side length</param>
-		/// <param name="orientation">Orientation of the hexagons</param>
-		/// <param name="xOffset">X coordinate offset</param>
-		/// <param name="yOffset">Y coordinate offset</param>
-		public Board(int width, int height, int side, Hexagonal.HexOrientation orientation, int xOffset, int yOffset)
-		{
-			Initialize(width, height, side, orientation, xOffset, yOffset);
-		}
+		private float pixelWidth;
+		private float pixelHeight;
 
 		#region Properties
 
@@ -145,26 +127,22 @@ namespace Hexagonal
 
 		#endregion 
 
-		/// <summary>
-		/// Sets internal fields and creates board
-		/// </summary>
-		/// <param name="width">Board width</param>
-		/// <param name="height">Board height</param>
-		/// <param name="side">Hexagon side length</param>
-		/// <param name="orientation">Orientation of the hexagons</param>
-		/// <param name="xOffset">X coordinate offset</param>
-		/// <param name="yOffset">Y coordinate offset</param>
-		
-		private void Initialize(int width, int height, int side, Hexagonal.HexOrientation orientation, int xOffset, int yOffset)
-		{
-			this.width = width;
-			this.height = height;
+        /// <param name="width">Board width</param>
+        /// <param name="height">Board height</param>
+        /// <param name="side">Hexagon side length</param>
+        /// <param name="orientation">Orientation of the hexagons</param>
+        /// <param name="xOffset">X coordinate offset</param>
+        /// <param name="yOffset">Y coordinate offset</param>
+        public Board(int width, int height, int side, Hexagonal.HexOrientation orientation, int xOffset, int yOffset, BoardState boardState)
+		{                                                    
+			this.width = width;                              
+			this.height = height;                            
+			this.side = side;                                
+			this.orientation = orientation;                  
 			this.xOffset = xOffset;
 			this.yOffset = yOffset;
-			this.side = side;
-			this.orientation = orientation;
+            this.boardState = boardState;
 			hexes = new Hex[height, width]; //opposite of what we'd expect
-			this.boardState = new BoardState();
 
 			float h = Hexagonal.Math.CalculateH(side); // short side
 			float r = Hexagonal.Math.CalculateR(side); // long side

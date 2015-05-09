@@ -14,8 +14,8 @@ namespace HexagonalTest
 	public partial class TestForm : Form
 	{
 
-		Hexagonal.Board board;
-		Hexagonal.GraphicsEngine graphicsEngine;
+		Board board;
+		GraphicsEngine graphicsEngine;
 
 		public TestForm()
 		{
@@ -32,13 +32,21 @@ namespace HexagonalTest
 
 		private void startGame()
 		{
-			Board board = new Board(20, 15, 25, HexOrientation.Pointy);
-			//board.BoardState.BackgroundColor = Color.Green;
-			board.BoardState.GridPenWidth = 2;
-			board.BoardState.ActiveHexBorderColor = Color.Red;
-			board.BoardState.ActiveHexBorderWidth = 2; 
-			
-			this.board = board;
+
+            BoardState state = new Builder.BoardStateBuilder()
+                .withGridPenWidth(2)
+                .withActiveHexBorderColor(Color.Red)
+                .withActiveGridPenWidth(2)
+                .build();
+
+            this.board = new Builder.BoardBuilder()
+                .witHeight(20)
+                .withWidht(15)
+                .withSide(25)
+                .withOrientation(HexOrientation.Pointy)
+                .withBoardState(state)
+                .build();
+
 			this.graphicsEngine = new GraphicsEngine(board,20,20);
 		}
 

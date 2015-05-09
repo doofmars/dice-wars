@@ -44,6 +44,7 @@
   <ItemGroup>
     <Compile Include="Hexagonal\Board.cs" />
     <Compile Include="Hexagonal\BoardState.cs" />
+    <Compile Include="Hexagonal\Builder.cs" />
     <Compile Include="Hexagonal\FlatVertice.cs" />
     <Compile Include="Hexagonal\GraphicsEngine.cs" />
     <Compile Include="Hexagonal\Hex.cs" />
