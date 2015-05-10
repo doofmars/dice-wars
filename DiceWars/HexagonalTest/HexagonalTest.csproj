@@ -45,12 +45,14 @@
     <Compile Include="Hexagonal\Board.cs" />
     <Compile Include="Hexagonal\BoardState.cs" />
     <Compile Include="Hexagonal\Builder.cs" />
+    <Compile Include="Hexagonal\PlayerColours.cs" />
     <Compile Include="Hexagonal\FlatVertice.cs" />
     <Compile Include="Hexagonal\GraphicsEngine.cs" />
     <Compile Include="Hexagonal\Hex.cs" />
     <Compile Include="Hexagonal\HexOrientation.cs" />
     <Compile Include="Hexagonal\HexState.cs" />
     <Compile Include="Hexagonal\Math.cs" />
+    <Compile Include="Hexagonal\Player.cs" />
     <Compile Include="Hexagonal\PointyVertice.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

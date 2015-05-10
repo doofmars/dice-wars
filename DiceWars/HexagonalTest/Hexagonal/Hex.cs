@@ -19,35 +19,28 @@ namespace Hexagonal
 		private HexState hexState;
 	
 		/// <param name="side">length of one side of the hexagon</param>
-        public Hex(int x, int y, int side, Hexagonal.HexOrientation orientation, int posX, int posY)
+
+
+        public Hex(float x, float y, float side, Hexagonal.HexOrientation orientation, Player player, int posX, int posY)
 		{
-            Initialize(Hexagonal.Math.ConvertToFloat(x), Hexagonal.Math.ConvertToFloat(y), Hexagonal.Math.ConvertToFloat(side), orientation, posX, posY);
+            Initialize(x, y, side, orientation, player, posX, posY);
 		}
 
-        public Hex(float x, float y, float side, Hexagonal.HexOrientation orientation, int posX, int posY)
+        public Hex(PointF point, float side, HexOrientation orientation, Player player, int posX, int posY)
 		{
-            Initialize(x, y, side, orientation, posX, posY);
+			Initialize(point.X, point.Y, side, orientation, player, posX, posY);
 		}
-
-		public Hex(PointF point, float side, HexOrientation orientation, int posX, int posY)
-		{
-			Initialize(point.X, point.Y, side, orientation, posX, posY);
-		}
-
-		public Hex()
-		{ }
 
 		/// <summary>
 		/// Sets internal fields and calls CalculateVertices()
 		/// </summary>
-        private void Initialize(float x, float y, float side, Hexagonal.HexOrientation orientation, int posX, int posY)
+        private void Initialize(float x, float y, float side, Hexagonal.HexOrientation orientation, Player player, int posX, int posY)
 		{
 			this.x = x;
 			this.y = y;
 			this.side = side;
 			this.orientation = orientation;
-            Console.WriteLine("new" + x + "da" + y);
-			this.hexState = new HexState();
+			this.hexState = new HexState(player.Colour);
             //The IsNeigbour relys on the gridPosition
             if (orientation == Hexagonal.HexOrientation.Pointy) {
                 this.gridPosX = posX;

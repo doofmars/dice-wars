@@ -43,6 +43,7 @@ namespace HexagonalTest
                 .witHeight(15)
                 .withWidht(15)
                 .withSide(25)
+                .withPlayer(5)
                 .withOrientation(HexOrientation.Pointy)
                 .withBoardState(state)
                 .build();

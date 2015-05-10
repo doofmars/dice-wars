@@ -1,6 +1,8 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Text;
+using System.Drawing;
 
 namespace Hexagonal
 {
@@ -18,6 +20,7 @@ namespace Hexagonal
 		private Hexagonal.HexOrientation orientation;
 		private System.Drawing.Color backgroundColor;
 		private Hexagonal.BoardState boardState;
+        private ArrayList players = new ArrayList();
 
 		private float pixelWidth;
 		private float pixelHeight;
@@ -133,7 +136,7 @@ namespace Hexagonal
         /// <param name="orientation">Orientation of the hexagons</param>
         /// <param name="xOffset">X coordinate offset</param>
         /// <param name="yOffset">Y coordinate offset</param>
-        public Board(int width, int height, int side, Hexagonal.HexOrientation orientation, int xOffset, int yOffset, BoardState boardState)
+        public Board(int width, int height, int side, Hexagonal.HexOrientation orientation, int xOffset, int yOffset, BoardState boardState, ArrayList players)
 		{                                                    
 			this.width = width;                              
 			this.height = height;                            
@@ -142,6 +145,7 @@ namespace Hexagonal
 			this.xOffset = xOffset;
 			this.yOffset = yOffset;
             this.boardState = boardState;
+            this.players = players;
 			hexes = new Hex[height, width]; //opposite of what we'd expect
 
 			float h = Hexagonal.Math.CalculateH(side); // short side
@@ -186,6 +190,7 @@ namespace Hexagonal
 			{
 				for (int j = 0; j < width; j++)
 				{
+                    Player randomPlayer = getRandomPlayer();
 					// Set position booleans
 					#region Position Booleans
 						if (i == 0)
@@ -270,10 +275,10 @@ namespace Hexagonal
 						switch (orientation)
 						{ 
 							case HexOrientation.Flat:
-								hexes[0, 0] = new Hex(0 + h + xOffset, 0 + yOffset, side, orientation, 0, 0);
+								hexes[0, 0] = new Hex(0 + h + xOffset, 0 + yOffset, side, orientation, randomPlayer, 0, 0);
 								break;
 							case HexOrientation.Pointy:
-                                hexes[0, 0] = new Hex(0 + r + xOffset, 0 + yOffset, side, orientation, 0, 0);
+                                hexes[0, 0] = new Hex(0 + r + xOffset, 0 + yOffset, side, orientation, randomPlayer, 0, 0);
 								break;
 							default:
 								break;
@@ -290,7 +295,7 @@ namespace Hexagonal
 								if (inLeftColumn)
 								{
 									// Calculate from hex above
-									hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.FlatVertice.BottomLeft], side, orientation, j, i);
+									hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.FlatVertice.BottomLeft], side, orientation, randomPlayer, j, i);
 								}
 								else
 								{
@@ -302,12 +307,12 @@ namespace Hexagonal
 										float y = hexes[i, j - 1].Points[(int)Hexagonal.FlatVertice.UpperRight].Y;
 										x += h;
 										y -= r;
-                                        hexes[i, j] = new Hex(x, y, side, orientation, j, i);
+                                        hexes[i, j] = new Hex(x, y, side, orientation, randomPlayer, j, i);
 									}
 									else
 									{
 										// Calculate from Hex to left's Middle Right Vertice
-                                        hexes[i, j] = new Hex(hexes[i, j - 1].Points[(int)Hexagonal.FlatVertice.MiddleRight], side, orientation, j, i);
+                                        hexes[i, j] = new Hex(hexes[i, j - 1].Points[(int)Hexagonal.FlatVertice.MiddleRight], side, orientation, randomPlayer, j, i);
 									}
 								}
 								break;
@@ -317,11 +322,11 @@ namespace Hexagonal
 									// Calculate from hex above and need to stagger the rows
 									if (i % 2 == 0)
 									{
-                                        hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomLeft], side, orientation, j, i);
+                                        hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomLeft], side, orientation, randomPlayer, j, i);
 									}
 									else
 									{
-                                        hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomRight], side, orientation, j, i);
+                                        hexes[i, j] = new Hex(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomRight], side, orientation, randomPlayer, j, i);
 									}
 
 								}
@@ -332,7 +337,7 @@ namespace Hexagonal
 									float y = hexes[i, j - 1].Points[(int)Hexagonal.PointyVertice.UpperRight].Y;
 									x += r;
 									y -= h;
-                                    hexes[i, j] = new Hex(x, y, side, orientation, j, i);	
+                                    hexes[i, j] = new Hex(x, y, side, orientation, randomPlayer, j, i);	
 								}
 								break;
 							default:
@@ -346,9 +351,30 @@ namespace Hexagonal
 				}
 			}
 
-
+            printStatus();
 			
 		}
+
+        /// This function is pretty nasty because the default c# random function cant provide enough entropy
+        private Player getRandomPlayer()
+        {
+            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
+            byte[] data = new byte[8];
+            rng.GetBytes(data);
+            ulong randomValue = BitConverter.ToUInt64(data, 0);
+            int index = (int)(randomValue % (ulong)this.players.Count);
+            Player candidate = (Player)this.players[index];
+            candidate.addField();
+            return candidate;
+        }
+
+        private void printStatus()
+        {
+            foreach (Player player in players)
+            {
+                Console.WriteLine("Player " + player.ID + " Fields " + player.Fields);
+            }
+        }
 
 		public bool PointInBoardRectangle(System.Drawing.Point point)
 		{
