@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Collections;
 
 namespace Hexagonal
 {
@@ -14,6 +15,7 @@ namespace Hexagonal
             private int height;
             private int side;
             //Optional
+            private int player = 2;
             private HexOrientation orientation = HexOrientation.Pointy;
             private int xOffset = 0;
             private int yOffset = 0;
@@ -50,6 +52,16 @@ namespace Hexagonal
                 return this;
             }
 
+            public BoardBuilder withPlayer(int player)
+            {
+                if (player <= 0)
+                {
+                    throw new ArgumentException("Side must be greater than 0");
+                }
+                this.player = player;
+                return this;
+            }
+
             public BoardBuilder withOrientation(HexOrientation orientation)
             {
                 this.orientation = orientation;
@@ -80,7 +92,12 @@ namespace Hexagonal
                 {
                     throw new ArgumentException("width, height and side must be set!");
                 }
-                return new Board(this.width, this.height, this.side, this.orientation, this.xOffset, this.yOffset, this.boardState);
+                ArrayList players = new ArrayList();
+                for (int i = 0; i < player; i++)
+                {
+                    players.Add(new Player(i, PlayerColours.colours[i]));
+                }
+                return new Board(this.width, this.height, this.side, this.orientation, this.xOffset, this.yOffset, this.boardState, players);
             }
         }
 
