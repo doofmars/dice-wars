@@ -95,7 +95,7 @@ namespace Hexagonal
                 ArrayList players = new ArrayList();
                 for (int i = 0; i < player; i++)
                 {
-                    players.Add(new Player(i, PlayerColours.colours[i]));
+                    players.Add(new Player(i, PlayerColors.colors[i]));
                 }
                 return new Board(this.width, this.height, this.side, this.orientation, this.xOffset, this.yOffset, this.boardState, players);
             }
