@@ -70,36 +70,20 @@ namespace HexagonalTest
 				if (clickedHex == null)
 				{
 					Console.WriteLine("No hex was clicked.");
-					board.BoardState.ActiveHex = null;
-					
 				}
 				else
 				{
                     Console.WriteLine("Hex " + clickedHex + " was clicked.");
-                    if (board.BoardState.ActiveHex == null)
+                    if (board.getCurrentPlayerColour() == clickedHex.HexState.BackgroundColor) 
                     {
                         board.BoardState.ActiveHex = clickedHex;
-                        current_player.BackColor = clickedHex.HexState.BackgroundColor;
                     }
-                        else
+                    else if (clickedHex.IsNeighbor(board.BoardState.ActiveHex)) 
                     {
-                        if (clickedHex.HexState.BackgroundColor == current_player.BackColor)
-                        {
-                            board.BoardState.ActiveHex = clickedHex;
-                        } 
-                        else if (board.BoardState.ActiveHex.IsNeighbor(clickedHex))
-                        {
-                            clickedHex.HexState.BackgroundColor = board.BoardState.ActiveHex.HexState.BackgroundColor;
-                            board.BoardState.ActiveHex = clickedHex;
-                            if (e.Button == MouseButtons.Right)
-                            {
-                                clickedHex.HexState.BackgroundColor = Color.Blue;
-                            }
-                        }
+                        clickedHex.HexState.BackgroundColor = board.getCurrentPlayerColour();
+                        board.BoardState.ActiveHex = clickedHex;
                     }
-                  
 				}
-
 			}
 		}
 
@@ -116,7 +100,8 @@ namespace HexagonalTest
 			{
 				graphicsEngine.Draw(e.Graphics);
 			}
-
+            //set Current player from model
+            current_player.BackColor = this.board.getCurrentPlayerColour();
 			//Force the next Paint()
 			this.Invalidate();
 
