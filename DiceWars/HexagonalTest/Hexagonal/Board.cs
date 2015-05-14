@@ -368,6 +368,11 @@ namespace Hexagonal
             return candidate;
         }
 
+        public Color getCurrentPlayerColour()
+        {
+            return ((Player)this.players[this.boardState.ActivePlayer]).Colour;
+        }
+
         private void printStatus()
         {
             foreach (Player player in players)
