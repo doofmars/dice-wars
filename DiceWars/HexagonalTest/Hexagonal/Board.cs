@@ -368,6 +368,9 @@ namespace Hexagonal
             return candidate;
         }
 
+        /// <summary>
+        /// Function to set the Active player to be the next player
+        /// </summary>
         public void nextPlayer()
         {
             int currentPlayer = this.boardState.ActivePlayer;
@@ -381,11 +384,19 @@ namespace Hexagonal
             }
         }
 
+        /// <summary>
+        /// Function to get the color of the ActivePlayer
+        /// </summary>
+        /// <returns>A Color</returns>
         public Color getCurrentPlayerColour()
         {
             return ((Player)this.players[this.boardState.ActivePlayer]).Colour;
         }
 
+        /// <summary>
+        /// Get the field distribution for every player as string
+        /// </summary>
+        /// <returns>A String</returns>
         public String getStatus()
         {
             String status = "";
