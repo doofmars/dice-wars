@@ -85,6 +85,8 @@ namespace HexagonalTest
                     }
 				}
 			}
+            //Update status lable
+            lable_players.Text = this.board.getStatus();
 		}
 
 		private void Form_Paint(object sender, PaintEventArgs e)
@@ -102,6 +104,8 @@ namespace HexagonalTest
 			}
             //set Current player from model
             current_player.BackColor = this.board.getCurrentPlayerColour();
+            //Update status lable
+            lable_players.Text = this.board.getStatus();
 			//Force the next Paint()
 			this.Invalidate();
 

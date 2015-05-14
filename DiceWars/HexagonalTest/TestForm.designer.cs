@@ -32,6 +32,7 @@ namespace HexagonalTest
             this.label4 = new System.Windows.Forms.Label();
             this.bt_end = new System.Windows.Forms.Button();
             this.current_player = new System.Windows.Forms.Panel();
+            this.lable_players = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // labelXY
@@ -78,11 +79,22 @@ namespace HexagonalTest
             this.current_player.Size = new System.Drawing.Size(65, 65);
             this.current_player.TabIndex = 12;
             // 
+            // lable_players
+            // 
+            this.lable_players.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.lable_players.AutoSize = true;
+            this.lable_players.Location = new System.Drawing.Point(12, 605);
+            this.lable_players.Name = "lable_players";
+            this.lable_players.Size = new System.Drawing.Size(35, 13);
+            this.lable_players.TabIndex = 13;
+            this.lable_players.Text = "label1";
+            // 
             // TestForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(803, 603);
+            this.ClientSize = new System.Drawing.Size(803, 627);
+            this.Controls.Add(this.lable_players);
             this.Controls.Add(this.current_player);
             this.Controls.Add(this.bt_end);
             this.Controls.Add(this.label4);
@@ -105,5 +117,6 @@ namespace HexagonalTest
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button bt_end;
         private System.Windows.Forms.Panel current_player;
+        private System.Windows.Forms.Label lable_players;
 	}
 }

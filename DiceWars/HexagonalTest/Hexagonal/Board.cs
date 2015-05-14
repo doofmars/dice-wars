@@ -351,7 +351,7 @@ namespace Hexagonal
 				}
 			}
 
-            printStatus();
+            Console.WriteLine(getStatus());
 			
 		}
 
@@ -386,12 +386,14 @@ namespace Hexagonal
             return ((Player)this.players[this.boardState.ActivePlayer]).Colour;
         }
 
-        private void printStatus()
+        public String getStatus()
         {
+            String status = "";
             foreach (Player player in players)
             {
-                Console.WriteLine("Player " + player.ID + " Fields " + player.Fields);
+                status += player.Colour.Name + "=" + player.Fields + "     ";
             }
+            return status;
         }
 
 		public bool PointInBoardRectangle(System.Drawing.Point point)
