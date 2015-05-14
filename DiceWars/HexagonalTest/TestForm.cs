@@ -80,8 +80,7 @@ namespace HexagonalTest
                     }
                     else if (clickedHex.IsNeighbor(board.BoardState.ActiveHex)) 
                     {
-                        clickedHex.HexState.BackgroundColor = board.getCurrentPlayerColour();
-                        board.BoardState.ActiveHex = clickedHex;
+                        board.performAttack(board.BoardState.ActiveHex, clickedHex);
                     }
 				}
 			}

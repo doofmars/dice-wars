@@ -394,6 +394,48 @@ namespace Hexagonal
         }
 
         /// <summary>
+        /// Function to find a player by its color
+        /// </summary>
+        /// <param name="color">The color of the player</param>
+        /// <returns>The player object</returns>
+        private Player findPlayerByColor(Color color)
+        {
+            foreach (Player player in players)
+            {
+                if (player.Colour == color)
+                {
+                    return player;
+                }
+            }
+            throw new ArgumentException("This should never have happend and I'm really sorry");
+        }
+
+        /// <summary>
+        /// This function is triggered, when an player attacks another player
+        /// </summary>
+        /// <param name="attacker">the hex field where the attack has started</param>
+        /// <param name="defender">the desination where the attack leads to</param>
+        public void performAttack(Hex attacker, Hex defender)
+        {
+            Player attackerP = findPlayerByColor(attacker.HexState.BackgroundColor);
+            Player defenderP = findPlayerByColor(defender.HexState.BackgroundColor);
+
+            defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
+            this.BoardState.ActiveHex = defender;
+            attackerP.Fields += 1;
+            defenderP.Fields -= 1;
+
+            if (defenderP.Fields == 0)
+            {
+                Console.WriteLine(defenderP.Colour.Name + " has been defeated.");
+            }
+            if (attackerP.Fields == this.width * this.height)
+            {
+                Console.WriteLine(defenderP.Colour.Name + " has won.");
+            }
+        }
+
+        /// <summary>
         /// Get the field distribution for every player as string
         /// </summary>
         /// <returns>A String</returns>
