@@ -54,9 +54,9 @@ namespace Hexagonal
 
             public BoardBuilder withPlayer(int player)
             {
-                if (player <= 0)
+                if (player <= 1)
                 {
-                    throw new ArgumentException("Side must be greater than 0");
+                    throw new ArgumentException("There must be more than 1 Player");
                 }
                 this.player = player;
                 return this;
@@ -97,7 +97,7 @@ namespace Hexagonal
                 {
                     players.Add(new Player(i, PlayerColors.colors[i]));
                 }
-                this.boardState.ActivePlayer = ((Player)players[0]).ID;
+                this.boardState.ActivePlayer = 0;
                 return new Board(this.width, this.height, this.side, this.orientation, this.xOffset, this.yOffset, this.boardState, players);
             }
         }

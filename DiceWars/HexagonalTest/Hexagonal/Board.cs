@@ -368,6 +368,19 @@ namespace Hexagonal
             return candidate;
         }
 
+        public void nextPlayer()
+        {
+            int currentPlayer = this.boardState.ActivePlayer;
+            if (currentPlayer + 1 >= players.Count)
+            {
+                boardState.ActivePlayer = 0;
+            }
+            else
+            {
+                boardState.ActivePlayer = currentPlayer + 1;
+            }
+        }
+
         public Color getCurrentPlayerColour()
         {
             return ((Player)this.players[this.boardState.ActivePlayer]).Colour;
