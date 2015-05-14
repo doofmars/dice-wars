@@ -126,7 +126,7 @@ namespace Hexagonal
 		/// </summary>
         public Boolean IsNeighbor(Hex that)
         {
-            if(this.Equals(that)){
+            if(that == null || this.Equals(that)){
                 return false;
             }
             //Left or right of target
@@ -253,6 +253,38 @@ namespace Hexagonal
         {
             return "Hexagon[ x=" + gridPosX + ", y=" + gridPosY + "]";
         }
+
+        public override bool Equals(object obj)
+        {
+            if (obj == null) 
+            {
+                return false;
+            }
+
+            if (this.GetType() == obj.GetType()) 
+            {
+                return false;
+            }
+
+            Hex that = (Hex)obj;
+
+            if (this.side == that.side && 
+                this.h == that.h && 
+                this.r == that.r && 
+                this.orientation == that.orientation && 
+                this.x == that.x && 
+                this.y == that.y &&
+                this.gridPosX == that.gridPosX &&
+                this.gridPosY == that.gridPosY)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
 
 	}
 }
