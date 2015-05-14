@@ -97,6 +97,7 @@ namespace Hexagonal
                 {
                     players.Add(new Player(i, PlayerColors.colors[i]));
                 }
+                this.boardState.ActivePlayer = ((Player)players[0]).ID;
                 return new Board(this.width, this.height, this.side, this.orientation, this.xOffset, this.yOffset, this.boardState, players);
             }
         }
