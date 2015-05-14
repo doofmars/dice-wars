@@ -13,6 +13,7 @@ namespace Hexagonal
 		private Hexagonal.Hex activeHex;
 		private System.Drawing.Color activeHexBorderColor;
 		private int activeHexBorderWidth;
+        private int activePlayer;
 
 		#region Properties
 
@@ -76,17 +77,29 @@ namespace Hexagonal
 			}
 		}
 
-		public int ActiveHexBorderWidth
-		{
-			get
-			{
-				return activeHexBorderWidth;
-			}
-			set
-			{
-				activeHexBorderWidth = value;
-			}
-		}
+        public int ActiveHexBorderWidth
+        {
+            get
+            {
+                return activeHexBorderWidth;
+            }
+            set
+            {
+                activeHexBorderWidth = value;
+            }
+        }
+
+        public int ActivePlayer
+        {
+            get
+            {
+                return activePlayer;
+            }
+            set
+            {
+                activePlayer = value;
+            }
+        }
 		#endregion
 
         public BoardState(Color backgroundColor, Color gridColor, int gridPenWidth, Color activeHexBorderColor, int activeHexBorderWidth)
@@ -98,5 +111,7 @@ namespace Hexagonal
             this.activeHexBorderColor = activeHexBorderColor;
             this.activeHexBorderWidth = activeHexBorderWidth;
 		}
+
+
 	}
 }
