@@ -29,7 +29,7 @@ namespace Hexagonal
             }
         }
 
-        public Color Colour
+        public Color Color
         {
             get
             {

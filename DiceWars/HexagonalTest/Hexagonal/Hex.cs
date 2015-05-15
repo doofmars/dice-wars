@@ -19,13 +19,20 @@ namespace Hexagonal
 		private HexState hexState;
         private int dices;
 	
-		/// <param name="side">length of one side of the hexagon</param>
-
-        public Hex(float side, Hexagonal.HexOrientation orientation, Player player, int posX, int posY, int dices)
+        /// <summary>
+        /// Constructor to initalize the Hexagon with the fixed values
+        /// </summary>
+        /// <param name="side">Hexagon side length</param>
+        /// <param name="orientation">Orientation of the hexagons</param>
+        /// <param name="playerColor">The players color</param>
+        /// <param name="posX">The X position in the grid</param>
+        /// <param name="posY">The Y position in the grid</param>
+        /// <param name="dices">Number of dices on this Hex</param>
+        public Hex(float side, Hexagonal.HexOrientation orientation, Color playerColor, int posX, int posY, int dices)
         {
             this.side = side;
             this.orientation = orientation;
-            this.hexState = new HexState(player.Colour);
+            this.hexState = new HexState(playerColor);
             this.dices = dices;
 
             //The IsNeigbour relys on the gridPosition

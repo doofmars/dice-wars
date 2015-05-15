@@ -192,7 +192,7 @@ namespace Hexagonal
 				for (int j = 0; j < width; j++)
 				{
                     Player randomPlayer = getRandomPlayer();
-                    Hex current = new Hex(side, orientation, randomPlayer, j, i, 5);
+                    Hex current = new Hex(side, orientation, randomPlayer.Color, j, i, 5);
 					// Set position booleans
 					#region Position Booleans
 						if (i == 0)
@@ -393,7 +393,7 @@ namespace Hexagonal
         /// <returns>A Color</returns>
         public Color getCurrentPlayerColour()
         {
-            return ((Player)this.players[this.boardState.ActivePlayer]).Colour;
+            return ((Player)this.players[this.boardState.ActivePlayer]).Color;
         }
 
         /// <summary>
@@ -405,7 +405,7 @@ namespace Hexagonal
         {
             foreach (Player player in players)
             {
-                if (player.Colour == color)
+                if (player.Color == color)
                 {
                     return player;
                 }
@@ -430,11 +430,14 @@ namespace Hexagonal
 
             if (defenderP.Fields == 0)
             {
-                Console.WriteLine(defenderP.Colour.Name + " has been defeated.");
+                Console.WriteLine(defenderP.Color.Name + " has been defeated.");
             }
             if (attackerP.Fields == this.width * this.height)
             {
-                Console.WriteLine(defenderP.Colour.Name + " has won.");
+                Console.WriteLine(defenderP.Color.Name + " has won.");
+            }
+        }
+
             }
         }
 
@@ -447,7 +450,7 @@ namespace Hexagonal
             String status = "";
             foreach (Player player in players)
             {
-                status += player.Colour.Name + "=" + player.Fields + "     ";
+                status += player.Color.Name + "=" + player.Fields + "     ";
             }
             return status;
         }
