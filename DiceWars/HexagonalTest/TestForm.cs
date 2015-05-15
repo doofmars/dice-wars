@@ -54,7 +54,7 @@ namespace HexagonalTest
 		private void Form_MouseClick(object sender, MouseEventArgs e)
 		{
 			
-			Console.WriteLine("Mouse Click " + e.Location.ToString());
+			//Console.WriteLine("Mouse Click " + e.Location.ToString());
 			
 			if (board != null && graphicsEngine != null)
 			{
@@ -63,7 +63,7 @@ namespace HexagonalTest
 				//
 				Point mouseClick = new Point(e.X - graphicsEngine.BoardXOffset, e.Y - graphicsEngine.BoardYOffset);
 
-				Console.WriteLine("Click in Board bounding rectangle: {0}", board.PointInBoardRectangle(e.Location));
+				//Console.WriteLine("Click in Board bounding rectangle: {0}", board.PointInBoardRectangle(e.Location));
 
 				Hex clickedHex = board.FindHexMouseClick(mouseClick);
 
@@ -73,7 +73,12 @@ namespace HexagonalTest
 				}
 				else
 				{
-                    Console.WriteLine("Hex " + clickedHex + " was clicked.");
+                    if (e.Button == MouseButtons.Right)
+                    {
+                        Console.WriteLine("Hex " + clickedHex + " was clicked." + "Hex has " + clickedHex.Dices + " Dices");
+                        return;
+                    }
+
                     if (board.getCurrentPlayerColour() == clickedHex.HexState.BackgroundColor) 
                     {
                         board.BoardState.ActiveHex = clickedHex;
