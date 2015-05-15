@@ -21,6 +21,7 @@ namespace Hexagonal
 		private System.Drawing.Color backgroundColor;
 		private Hexagonal.BoardState boardState;
         private ArrayList players = new ArrayList();
+        private static readonly Random RANDOM = new Random();
 
 		private float pixelWidth;
 		private float pixelHeight;
@@ -358,14 +359,7 @@ namespace Hexagonal
         /// This function is pretty nasty because the default c# random function cant provide enough entropy
         private Player getRandomPlayer()
         {
-            System.Security.Cryptography.RNGCryptoServiceProvider rng = new System.Security.Cryptography.RNGCryptoServiceProvider();
-            byte[] data = new byte[8];
-            rng.GetBytes(data);
-            ulong randomValue = BitConverter.ToUInt64(data, 0);
-            int index = (int)(randomValue % (ulong)this.players.Count);
-            Player candidate = (Player)this.players[index];
-            candidate.addField();
-            return candidate;
+             return (Player)players[RANDOM.Next(0, players.Count)];
         }
 
         /// <summary>
