@@ -210,6 +210,18 @@ namespace Hexagonal
 			}
 		}
 
+        public int Dices
+        {
+            get
+            {
+                return dices;
+            }
+            set
+            {
+                dices = value;
+            }
+        }
+
 		public float R
 		{
 			get

@@ -368,7 +368,9 @@ namespace Hexagonal
         /// This function is pretty nasty because the default c# random function cant provide enough entropy
         private Player getRandomPlayer()
         {
-             return (Player)players[RANDOM.Next(0, players.Count)];
+            Player candidate = (Player)players[RANDOM.Next(0, players.Count)];
+            candidate.addField();
+            return candidate;
         }
 
         /// <summary>
@@ -420,24 +422,55 @@ namespace Hexagonal
         /// <param name="defender">the desination where the attack leads to</param>
         public void performAttack(Hex attacker, Hex defender)
         {
+            Console.WriteLine("Attacker:" + attacker.Dices + " Defender:" + defender.Dices);
+            if (attacker.Dices <= 1) 
+            {
+                Console.WriteLine("Attack not possible");
+                return;
+            }
             Player attackerP = findPlayerByColor(attacker.HexState.BackgroundColor);
             Player defenderP = findPlayerByColor(defender.HexState.BackgroundColor);
+            int attackerEyes = rollTheDice(attacker.Dices);
+            int defenderEyes = rollTheDice(attacker.Dices);
 
-            defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
-            this.BoardState.ActiveHex = defender;
-            attackerP.Fields += 1;
-            defenderP.Fields -= 1;
+            Console.WriteLine("Attacker Eyes:" + attackerEyes + " Defender Eyes:" + defenderEyes);
+            if (attackerEyes > defenderEyes)
+            {
+                Console.WriteLine("Attacker won");
+                defender.Dices = attacker.Dices - 1;
+                attacker.Dices = 1;
+                attackerP.Fields += 1;
+                defenderP.Fields -= 1;
+                defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
+                this.BoardState.ActiveHex = defender;
+            }
+            else
+            {
+                Console.WriteLine("Attacker lost");
+                attacker.Dices = 1;
+            }
 
             if (defenderP.Fields == 0)
             {
+                //Triggered when player is defeated
                 Console.WriteLine(defenderP.Color.Name + " has been defeated.");
             }
             if (attackerP.Fields == this.width * this.height)
             {
+                //Triggered if player has won
                 Console.WriteLine(defenderP.Color.Name + " has won.");
             }
         }
 
+        private int rollTheDice(int dices)
+        {
+            if (dices > 1)
+            {
+                return rollTheDice(dices - 1) + RANDOM.Next(1, 7);
+            }
+            else
+            {
+                return 0;
             }
         }
 
