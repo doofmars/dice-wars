@@ -17,30 +17,17 @@ namespace Hexagonal
         private int gridPosX;
         private int gridPosY;
 		private HexState hexState;
+        private int dices;
 	
 		/// <param name="side">length of one side of the hexagon</param>
 
+        public Hex(float side, Hexagonal.HexOrientation orientation, Player player, int posX, int posY, int dices)
+        {
+            this.side = side;
+            this.orientation = orientation;
+            this.hexState = new HexState(player.Colour);
+            this.dices = dices;
 
-        public Hex(float x, float y, float side, Hexagonal.HexOrientation orientation, Player player, int posX, int posY)
-		{
-            Initialize(x, y, side, orientation, player, posX, posY);
-		}
-
-        public Hex(PointF point, float side, HexOrientation orientation, Player player, int posX, int posY)
-		{
-			Initialize(point.X, point.Y, side, orientation, player, posX, posY);
-		}
-
-		/// <summary>
-		/// Sets internal fields and calls CalculateVertices()
-		/// </summary>
-        private void Initialize(float x, float y, float side, Hexagonal.HexOrientation orientation, Player player, int posX, int posY)
-		{
-			this.x = x;
-			this.y = y;
-			this.side = side;
-			this.orientation = orientation;
-			this.hexState = new HexState(player.Colour);
             //The IsNeigbour relys on the gridPosition
             if (orientation == Hexagonal.HexOrientation.Pointy) {
                 this.gridPosX = posX;
@@ -51,6 +38,20 @@ namespace Hexagonal
                 this.gridPosX = posY;
                 this.gridPosY = posX;
             }
+        }
+
+        public void Initialize(PointF point)
+		{
+            Initialize(point.X, point.Y);
+		}
+
+		/// <summary>
+		/// Sets internal fields and calls CalculateVertices()
+		/// </summary>
+        public void Initialize(float x, float y)
+		{
+			this.x = x;
+			this.y = y;
             
 			CalculateVertices();
 		}
