@@ -67,7 +67,7 @@ namespace HexagonalTest
                 for (int j = 0; j < 15; j++)
                 {
                     labels[i, j] = new Label();
-                    labels[i, j].Text = "5";
+                    labels[i, j].Text = board.Hexes[i, j].Dices.ToString();
                     labels[i, j].BackColor = board.Hexes[i, j].HexState.BackgroundColor;
                     labels[i, j].Size = new System.Drawing.Size(20, 15);
                     labels[i, j].Location = new Point(tmpX[i, j] + POSX, tmpY[i, j] + POSY);
