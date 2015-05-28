@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace Hexagonal
 {
@@ -12,7 +13,11 @@ namespace Hexagonal
 		private float h;
 		private float r;
 		private Hexagonal.HexOrientation orientation;
-		private float x;
+		// MaHa 
+        private int tmpX;
+        private int tmpY;
+        //
+        private float x;
 		private float y;
         private int gridPosX;
         private int gridPosY;
@@ -34,6 +39,7 @@ namespace Hexagonal
             this.orientation = orientation;
             this.hexState = new HexState(playerColor);
             this.dices = dices;
+            
 
             //The IsNeigbour relys on the gridPosition
             if (orientation == Hexagonal.HexOrientation.Pointy) {
@@ -59,6 +65,8 @@ namespace Hexagonal
 		{
 			this.x = x;
 			this.y = y;
+            this.tmpX = (int)x;
+            this.tmpY = (int)y;
             
 			CalculateVertices();
 		}
@@ -254,6 +262,24 @@ namespace Hexagonal
             set
             {
                 gridPosY = value;
+            }
+        }
+
+        // MaHa
+        public int TmpX
+        {
+            get
+            {
+                return tmpX;
+            }
+        }
+
+        // MaHa
+        public int TmpY
+        {
+            get
+            {
+                return tmpY;
             }
         }
 

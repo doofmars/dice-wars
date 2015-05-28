@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections;
 using System.Text;
+using System.Windows.Forms;
 using System.Drawing;
 
 namespace Hexagonal
@@ -22,6 +23,10 @@ namespace Hexagonal
 		private Hexagonal.BoardState boardState;
         private ArrayList players = new ArrayList();
         private static readonly Random RANDOM = new Random();
+        private int[,] textPosX; // MaHa
+        private int[,] textPosY; // MaHa
+
+
 
 		private float pixelWidth;
 		private float pixelHeight;
@@ -148,6 +153,9 @@ namespace Hexagonal
             this.boardState = boardState;
             this.players = players;
 			hexes = new Hex[height, width]; //opposite of what we'd expect
+
+            textPosX = new int[height, width]; // MaHa
+            textPosY = new int[height, width]; // MaHa
 
 			float h = Hexagonal.Math.CalculateH(side); // short side
 			float r = Hexagonal.Math.CalculateR(side); // long side
@@ -283,12 +291,15 @@ namespace Hexagonal
 							case HexOrientation.Pointy:
                                 current.Initialize(0 + r + xOffset, 0 + yOffset);
                                 hexes[0, 0] = current;
+
+                                // MaHa
+                                textPosX[0, 0] = 0 + (int)r + xOffset;
+                                textPosY[0, 0] = 0 + yOffset;
+
 								break;
 							default:
 								break;
-						}
-
-							
+						}		
 
 					}
 					else
@@ -331,11 +342,22 @@ namespace Hexagonal
 									{
                                         current.Initialize(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomLeft]);
                                         hexes[i, j] = current;
+                                        // MaHa
+                                        int tmpX = hexes[i, j].TmpX;
+                                        int tmpY = hexes[i, j].TmpY;
+                                        textPosX[i, j] = tmpX;
+                                        textPosY[i, j] = tmpY;
 									}
 									else
 									{
                                         current.Initialize(hexes[i - 1, j].Points[(int)Hexagonal.PointyVertice.BottomRight]);
                                         hexes[i, j] = current;
+                                        
+                                        // MaHa
+                                        int tmpX = hexes[i, j].TmpX;
+                                        int tmpY = hexes[i, j].TmpY;
+                                        textPosX[i, j] = tmpX;
+                                        textPosY[i, j] = tmpY;
 									}
 
 								}
@@ -348,6 +370,10 @@ namespace Hexagonal
 									y -= h;
                                     current.Initialize(x, y);
                                     hexes[i, j] = current;	
+
+                                    // MaHa
+                                    textPosX[i, j] = (int)x;
+                                    textPosY[i, j] = (int)y;
 								}
 								break;
 							default:
@@ -360,9 +386,7 @@ namespace Hexagonal
 
 				}
 			}
-
-            Console.WriteLine(getStatus());
-			
+            Console.WriteLine(getStatus());		
 		}
 
         /// This function is pretty nasty because the default c# random function cant provide enough entropy
@@ -393,7 +417,7 @@ namespace Hexagonal
         /// Function to get the color of the ActivePlayer
         /// </summary>
         /// <returns>A Color</returns>
-        public Color getCurrentPlayerColour()
+        public Color getCurrentPlayerColor()
         {
             return ((Player)this.players[this.boardState.ActivePlayer]).Color;
         }
@@ -550,8 +574,25 @@ namespace Hexagonal
 			return target;
 			
 		}
+        public int[,] TextPosX 
+        {
+            get
+            {
+                return this.textPosX;
+            }
+        }
 
-		
-
+        public int[,] TextPosY
+        {
+            get
+            {
+                return this.textPosY;
+            }
+        }
 	}
+
+
+    
+
+
 }

@@ -8,6 +8,8 @@ using System.Text;
 using System.Windows.Forms;
 using Hexagonal;
 using System.Diagnostics;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace HexagonalTest
 {
@@ -16,6 +18,7 @@ namespace HexagonalTest
 
 		Board board;
 		GraphicsEngine graphicsEngine;
+        private Label[,] labels;
 
 		public TestForm()
 		{
@@ -32,6 +35,9 @@ namespace HexagonalTest
 
 		private void startGame()
 		{
+            const int POSX = 12;
+            const int POSY = 35;
+
 
             BoardState state = new Builder.BoardStateBuilder()
                 .withGridPenWidth(2)
@@ -49,6 +55,26 @@ namespace HexagonalTest
                 .build();
 
 			this.graphicsEngine = new GraphicsEngine(board,20,20);
+
+            labels = new Label[15, 25]; // MaHa
+            // MaHa -- 
+            // Textboxen "zeichnen"
+            int[,] tmpX = board.TextPosX;
+            int[,] tmpY = board.TextPosY;
+
+            for (int i = 0; i < 15; i++)
+            {
+                for (int j = 0; j < 15; j++)
+                {
+                    labels[i, j] = new Label();
+                    labels[i, j].Text = "35";
+                    labels[i, j].Enabled = false;
+                    labels[i, j].Size = new System.Drawing.Size(20, 15);
+                    labels[i, j].Location = new Point(tmpX[i, j] + POSX, tmpY[i, j] + POSY);
+                    this.Controls.Add(labels[i, j]);
+                }
+            }
+            // -- End
 		}
 
 		private void Form_MouseClick(object sender, MouseEventArgs e)
@@ -79,7 +105,7 @@ namespace HexagonalTest
                         return;
                     }
 
-                    if (board.getCurrentPlayerColour() == clickedHex.HexState.BackgroundColor) 
+                    if (board.getCurrentPlayerColor() == clickedHex.HexState.BackgroundColor) 
                     {
                         board.BoardState.ActiveHex = clickedHex;
                     }
@@ -107,7 +133,7 @@ namespace HexagonalTest
 				graphicsEngine.Draw(e.Graphics);
 			}
             //set Current player from model
-            current_player.BackColor = this.board.getCurrentPlayerColour();
+            current_player.BackColor = this.board.getCurrentPlayerColor();
             //Update status lable
             lable_players.Text = this.board.getStatus();
 			//Force the next Paint()
@@ -132,7 +158,7 @@ namespace HexagonalTest
         {
             this.board.nextPlayer();
             //set Current player from model
-            current_player.BackColor = this.board.getCurrentPlayerColour();
+            current_player.BackColor = this.board.getCurrentPlayerColor();
             this.board.BoardState.ActiveHex = null;
         }
 
