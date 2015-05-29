@@ -69,11 +69,13 @@ namespace HexagonalTest
                     labels[i, j] = new Label();
                     labels[i, j].Text = board.Hexes[i, j].Dices.ToString();
                     labels[i, j].BackColor = board.Hexes[i, j].HexState.BackgroundColor;
-                    labels[i, j].Size = new System.Drawing.Size(20, 15);
+                    labels[i, j].Size = new System.Drawing.Size(13, 15);
                     labels[i, j].Location = new Point(tmpX[i, j] + POSX, tmpY[i, j] + POSY);
                     this.Controls.Add(labels[i, j]);
                 }
             }
+
+            DiceLabels.GetInstance.addLabels(this.labels);
             // -- End
 		}
 
