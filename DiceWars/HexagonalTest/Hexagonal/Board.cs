@@ -455,7 +455,7 @@ namespace Hexagonal
             Player attackerP = findPlayerByColor(attacker.HexState.BackgroundColor);
             Player defenderP = findPlayerByColor(defender.HexState.BackgroundColor);
             int attackerEyes = rollTheDice(attacker.Dices);
-            int defenderEyes = rollTheDice(attacker.Dices);
+            int defenderEyes = rollTheDice(defender.Dices);
 
             Console.WriteLine("Attacker Eyes:" + attackerEyes + " Defender Eyes:" + defenderEyes);
             if (attackerEyes > defenderEyes)
@@ -497,7 +497,7 @@ namespace Hexagonal
 
         private int rollTheDice(int dices)
         {
-            if (dices > 1)
+            if (dices > 0)
             {
                 return rollTheDice(dices - 1) + RANDOM.Next(1, 7);
             }
