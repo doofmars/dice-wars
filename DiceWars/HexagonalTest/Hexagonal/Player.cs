@@ -9,11 +9,14 @@ namespace Hexagonal
     {
         private int id;
         private int fields;
+        private int dices;
         private Color color;
 
         public Player(int id, Color color)
         {
             this.id = id;
+            this.dices = 0;
+            this.fields = 0;
             this.color = color;
         }
 
@@ -65,5 +68,24 @@ namespace Hexagonal
                 this.fields--;
             }
         }
+
+        public int Dices
+        {
+            get
+            {
+                return dices;
+            }
+            set
+            {
+                this.dices = value;
+            }
+        }
+
+        public void addDices(int dices)
+        {
+            this.dices += dices;
+        }
     }
+
+
 }

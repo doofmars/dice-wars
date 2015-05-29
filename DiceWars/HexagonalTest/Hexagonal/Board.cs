@@ -394,6 +394,7 @@ namespace Hexagonal
         {
             Player candidate = (Player)players[RANDOM.Next(0, players.Count)];
             candidate.addField();
+            candidate.addDices(5);
             return candidate;
         }
 
@@ -461,6 +462,7 @@ namespace Hexagonal
             if (attackerEyes > defenderEyes)
             {
                 Console.WriteLine("Attacker won");
+                defenderP.addDices((defender.Dices) * -1);
                 defender.Dices = attacker.Dices - 1;
                 attacker.Dices = 1;
                 attackerP.Fields += 1;
@@ -477,6 +479,7 @@ namespace Hexagonal
             else
             {
                 Console.WriteLine("Attacker lost");
+                attackerP.addDices((attacker.Dices - 1) * -1);
                 attacker.Dices = 1;
                 //MaHa
                 DiceLabels.GetInstance.changeLabel(attacker.GridPositionY, attacker.GridPositionX, attacker.Dices);
@@ -516,7 +519,7 @@ namespace Hexagonal
             String status = "";
             foreach (Player player in players)
             {
-                status += player.Color.Name + "=" + player.Fields + "     ";
+                status += player.Color.Name + "=" + player.Fields + "(" + player.Dices + ")     ";
             }
             return status;
         }
