@@ -300,6 +300,11 @@ namespace Hexagonal
             return "Hexagon[ x=" + gridPosX + ", y=" + gridPosY + "]";
         }
 
+        public override int GetHashCode()
+        {
+            return 1337;
+        }
+
         public override bool Equals(object obj)
         {
             if (obj == null) 

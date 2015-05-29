@@ -404,6 +404,7 @@ namespace Hexagonal
         public void nextPlayer()
         {
             int currentPlayer = this.boardState.ActivePlayer;
+            Console.WriteLine("Dice to distribute: " + findLargesPatchForPlayer(getCurrentPlayerColor()));
             if (currentPlayer + 1 >= players.Count)
             {
                 boardState.ActivePlayer = 0;
@@ -511,6 +512,81 @@ namespace Hexagonal
         }
 
         /// <summary>
+        /// Finds the largest patch for the given player color
+        /// TODO: patch will be tested multiple times
+        /// </summary>
+        /// <param name="playerColor">The players color</param>
+        /// <returns>the size of the lagest patch</returns>
+        public int findLargesPatchForPlayer(Color playerColor)
+        {
+            int largestField = 0;
+            for (int x = 0; x < this.height; x++)
+            {
+                for (int y = 0; y < this.width; y++)
+                {
+                    if (this.Hexes[x, y].HexState.BackgroundColor == playerColor)
+                    {
+                        int size = getPatchSize(this.Hexes[x, y], new ArrayList());
+                        if (largestField < size)
+                        {
+                            largestField = size;
+                        }
+
+                    }
+                }
+            }
+
+            return largestField;
+        }
+
+        /// <summary>
+        /// Function to determine the size of attached fields
+        /// </summary>
+        /// <param name="hex">the starting hex</param>
+        /// <param name="visited">for recursion, first call must be an empty arraylist</param>
+        /// <returns>The sum of attached fields</returns>
+        public int getPatchSize(Hex hex, ArrayList visited)
+        {
+            //Console.WriteLine(hex.ToString());
+            visited.Add(hex.ToString());
+            int k = 1;
+            for (int x = -1; x <= 1; x++)
+            {
+                int yStart = -1;
+                int yEnd = 1;
+                if (hex.GridPositionY % 2 == 0)
+                {
+                    if (x == 1)
+                    {
+                        yStart = 0;
+                        yEnd = 0;
+                    }
+                }
+                else
+                {
+                    if (x == -1)
+                    {
+                        yStart = 0;
+                        yEnd = 0;
+                    }
+                }
+                for (int y = yStart; y <= yEnd; y++)
+                {
+                    //Console.WriteLine("i:" + i +",j:" + j+ "{x:" + (start.GridPositionX + i) + ", y:" + (start.GridPositionY + j) + "}");
+                    if (!(x == 0 && y == 0) && !(hex.GridPositionX + x < 0 || hex.GridPositionX + x >= this.width || hex.GridPositionY + y < 0 || hex.GridPositionY + y >= this.height))
+                    {
+                        Hex neighbor = this.Hexes[(hex.GridPositionY + y), (hex.GridPositionX + x)];
+                        if (neighbor.HexState.BackgroundColor == hex.HexState.BackgroundColor && !visited.Contains(neighbor.ToString())) 
+                        {
+                            k = getPatchSize(neighbor, visited) + k;
+                        }
+                    }
+                }
+            }
+            return k;
+        }
+
+        /// <summary>
         /// Get the field distribution for every player as string
         /// </summary>
         /// <returns>A String</returns>
@@ -528,6 +604,7 @@ namespace Hexagonal
 		{
 			return PointInBoardRectangle(point.X,point.Y);
 		}
+
 
 		public bool PointInBoardRectangle(int x, int y)
 		{
