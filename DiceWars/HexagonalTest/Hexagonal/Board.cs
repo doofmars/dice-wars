@@ -467,11 +467,20 @@ namespace Hexagonal
                 defenderP.Fields -= 1;
                 defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
                 this.BoardState.ActiveHex = defender;
+
+                //MaHa
+                DiceLabels.GetInstance.changeLabel(attacker.GridPositionY, attacker.GridPositionX, 1);
+                DiceLabels.GetInstance.changeLabel(defender.GridPositionY, defender.GridPositionX, defender.Dices, attacker.HexState.BackgroundColor);
+                //
+
             }
             else
             {
                 Console.WriteLine("Attacker lost");
                 attacker.Dices = 1;
+                //MaHa
+                DiceLabels.GetInstance.changeLabel(attacker.GridPositionY, attacker.GridPositionX, attacker.Dices);
+                //
             }
 
             if (defenderP.Fields == 0)
