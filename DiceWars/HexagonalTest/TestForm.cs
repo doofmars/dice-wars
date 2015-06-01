@@ -13,16 +13,19 @@ using System.Drawing;
 
 namespace HexagonalTest
 {
-	public partial class TestForm : Form
+	public partial class Fight : Form
 	{
 
 		Board board;
 		GraphicsEngine graphicsEngine;
         private Label[,] labels;
+        int sizeOfField;
 
-		public TestForm()
+		public Fight(Board x, int size)
 		{
-			InitializeComponent();
+            board = x;
+            sizeOfField = size;
+			InitializeComponent(sizeOfField);
 
             startGame();
 		}
@@ -35,36 +38,21 @@ namespace HexagonalTest
 
 		private void startGame()
 		{
+            
             const int POSX = 15;
             const int POSY = 37;
-
-
-            BoardState state = new Builder.BoardStateBuilder()
-                .withGridPenWidth(2)
-                .withActiveHexBorderColor(Color.Red)
-                .withActiveGridPenWidth(2)
-                .build();
-
-            this.board = new Builder.BoardBuilder()
-                .witHeight(15)
-                .withWidht(15)
-                .withSide(25)
-                .withPlayer(5)
-                .withOrientation(HexOrientation.Pointy)
-                .withBoardState(state)
-                .build();
-
+            
 			this.graphicsEngine = new GraphicsEngine(board,20,20);
 
-            labels = new Label[15, 25]; // MaHa
+            labels = new Label[sizeOfField, sizeOfField]; // MaHa
             // MaHa -- 
             // Textboxen "zeichnen"
             int[,] tmpX = board.TextPosX;
             int[,] tmpY = board.TextPosY;
 
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < sizeOfField; i++)
             {
-                for (int j = 0; j < 15; j++)
+                for (int j = 0; j < sizeOfField; j++)
                 {
                     labels[i, j] = new Label();
                     labels[i, j].Text = board.Hexes[i, j].Dices.ToString();
@@ -164,7 +152,8 @@ namespace HexagonalTest
             this.board.BoardState.ActiveHex = null;
         }
 
-		
-		
+
+       
+
 	}
 }
