@@ -312,7 +312,7 @@ namespace Hexagonal
                 return false;
             }
 
-            if (this.GetType() == obj.GetType()) 
+            if (this.GetType() != obj.GetType()) 
             {
                 return false;
             }
