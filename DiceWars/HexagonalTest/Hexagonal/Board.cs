@@ -22,14 +22,14 @@ namespace Hexagonal
 		private System.Drawing.Color backgroundColor;
 		private Hexagonal.BoardState boardState;
         private ArrayList players = new ArrayList();
-        private static readonly Random RANDOM = new Random();
         private int[,] textPosX; // MaHa
         private int[,] textPosY; // MaHa
-
-
-
-		private float pixelWidth;
+		
+        private float pixelWidth;
 		private float pixelHeight;
+
+        private static readonly Random RANDOM = new Random();
+        private static readonly int MAX_DICE = 9;
 
 		#region Properties
 
@@ -403,16 +403,28 @@ namespace Hexagonal
         /// </summary>
         public void nextPlayer()
         {
-            int currentPlayer = this.boardState.ActivePlayer;
-            Console.WriteLine("Dice to distribute: " + findLargesPatchForPlayer(getCurrentPlayerColor()));
-            if (currentPlayer + 1 >= players.Count)
+            Player currentPlayer = this.getCurrentPlayerByID();
+            int largestPatch = findLargesPatchForPlayer(currentPlayer);
+
+
+            Console.WriteLine("Current Bank" + currentPlayer.Bank);
+            Console.WriteLine("Dice to distribute: " + largestPatch);
+            this.distributeDices(currentPlayer, largestPatch);
+            Console.WriteLine("Current Bank" + currentPlayer.Bank);
+
+            if (currentPlayer.ID + 1 >= players.Count)
             {
                 boardState.ActivePlayer = 0;
             }
             else
             {
-                boardState.ActivePlayer = currentPlayer + 1;
+                boardState.ActivePlayer = currentPlayer.ID + 1;
             }
+        }
+
+        private Player getCurrentPlayerByID()
+        {
+            return (Player)this.players[this.boardState.ActivePlayer];
         }
 
         /// <summary>
@@ -530,12 +542,12 @@ namespace Hexagonal
         /// <summary>
         /// Finds the largest patch for the given player color
         /// </summary>
-        /// <param name="playerColor">The players color</param>
+        /// <param name="player">The players</param>
         /// <returns>the size of the lagest patch</returns>
-        public int findLargesPatchForPlayer(Color playerColor)
+        public int findLargesPatchForPlayer(Player player)
         {
             int largestField = 0;
-            ArrayList fields = getFieldsForPlayer(playerColor);
+            ArrayList fields = getFieldsForPlayer(player.Color);
             while (fields.Count > 0)
             {
                 ArrayList patch = getPatch((Hex)fields[0], new ArrayList());
@@ -606,6 +618,32 @@ namespace Hexagonal
                 }
             }
             return visited;
+        }
+
+        private void distributeDices(Player player, int dice)
+        {
+            ArrayList fields = getFieldsForPlayer(player.Color);
+            dice += player.Bank;
+
+            while(fields.Count > 0 && dice > 0)
+            {
+                Hex randomHex = (Hex)fields[RANDOM.Next(fields.Count)];
+                if (randomHex.Dices < MAX_DICE) 
+                {
+                    Console.WriteLine(dice + "give field 1:" + randomHex.ToString());
+                    randomHex.Dices += 1;
+                    dice -= 1;
+                }
+                else
+                {
+                    fields.Remove(randomHex);
+                }
+            }
+            if (dice > 0)
+            {
+                player.Bank = dice;
+            }
+            
         }
 
         /// <summary>

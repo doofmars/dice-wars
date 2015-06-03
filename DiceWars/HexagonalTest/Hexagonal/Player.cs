@@ -10,6 +10,7 @@ namespace Hexagonal
         private int id;
         private int fields;
         private int dices;
+        private int bank;
         private Color color;
 
         public Player(int id, Color color)
@@ -17,6 +18,7 @@ namespace Hexagonal
             this.id = id;
             this.dices = 0;
             this.fields = 0;
+            this.bank = 0;
             this.color = color;
         }
 
@@ -53,6 +55,18 @@ namespace Hexagonal
             set
             {
                 this.fields = value;
+            }
+        }
+
+        public int Bank
+        {
+            get
+            {
+                return bank;
+            }
+            set
+            {
+                this.bank = value;
             }
         }
 
