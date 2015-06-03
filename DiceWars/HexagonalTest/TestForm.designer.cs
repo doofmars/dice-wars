@@ -81,6 +81,7 @@ namespace HexagonalTest
             this.bt_end = new System.Windows.Forms.Button();
             this.current_player = new System.Windows.Forms.Panel();
             this.lable_players = new System.Windows.Forms.Label();
+            
             this.SuspendLayout();
             // 
             // labelXY
@@ -126,6 +127,8 @@ namespace HexagonalTest
             this.current_player.Name = "current_player";
             this.current_player.Size = new System.Drawing.Size(65, 65);
             this.current_player.TabIndex = 12;
+            
+           
             // 
             // lable_players
             // 
@@ -172,5 +175,7 @@ namespace HexagonalTest
         private System.Windows.Forms.Button bt_end;
         private System.Windows.Forms.Panel current_player;
         private System.Windows.Forms.Label lable_players;
+    
+       
 	}
 }

@@ -23,10 +23,11 @@ namespace HexagonalTest
 
         private void buttonStart_Click(object sender, EventArgs e)
         {
-            if (numberOfPlayers == 0)
+            
+            if (numberOfPlayers == 0 || (comboBoxSize.SelectedIndex == -1)) 
             {
                 //error
-                System.Windows.Forms.MessageBox.Show("Select Player!");
+                System.Windows.Forms.MessageBox.Show("Select Player and size!");
             }
                 //normal way
             else
@@ -99,6 +100,27 @@ namespace HexagonalTest
         private void comboBoxSize_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = (char)Keys.None;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+           /* Datenbank.SqliteDatabase database = new Datenbank.SqliteDatabase();
+            database.connectDB();
+           
+            database.writeData( "Jan", "01:01:11", 1, "very small");
+            database.writeData("Jan2", "01:01:12", 2, "very big"); 
+            database.writeData( "Jan3", "01:01:13", 3, "normal");
+            database.writeData( "Jan4", "01:01:14", 1, "small"); */
+            
+
+            HexagonalTest.Stats statsForm = new HexagonalTest.Stats();
+            statsForm.Show();
+
+            //database.getData();
+            
+           // database.closeDatabase();
+
+
         }
 
     }
