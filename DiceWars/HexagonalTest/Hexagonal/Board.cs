@@ -394,7 +394,7 @@ namespace Hexagonal
         {
             Player candidate = (Player)players[RANDOM.Next(0, players.Count)];
             candidate.addField();
-            candidate.addDices(5);
+            candidate.Dices += 5;
             return candidate;
         }
 
@@ -406,10 +406,8 @@ namespace Hexagonal
             Player currentPlayer = this.getCurrentPlayerByID();
             int largestPatch = findLargesPatchForPlayer(currentPlayer);
 
-
-            Console.WriteLine("Current Bank" + currentPlayer.Bank);
-            Console.WriteLine("Dice to distribute: " + largestPatch);
             this.distributeDices(currentPlayer, largestPatch);
+            Console.WriteLine("Dice to distribute: " + largestPatch);
             Console.WriteLine("Current Bank" + currentPlayer.Bank);
 
             if (currentPlayer.ID + 1 >= players.Count)
@@ -475,28 +473,20 @@ namespace Hexagonal
             if (attackerEyes > defenderEyes)
             {
                 Console.WriteLine("Attacker won");
-                defenderP.addDices((defender.Dices) * -1);
+                defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
+                defenderP.Dices += ((defender.Dices) * -1);
                 defender.Dices = attacker.Dices - 1;
                 attacker.Dices = 1;
                 attackerP.Fields += 1;
                 defenderP.Fields -= 1;
-                defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
                 this.BoardState.ActiveHex = defender;
-
-                //MaHa
-                DiceLabels.GetInstance.changeLabel(attacker.GridPositionY, attacker.GridPositionX, 1);
-                DiceLabels.GetInstance.changeLabel(defender.GridPositionY, defender.GridPositionX, defender.Dices, attacker.HexState.BackgroundColor);
-                //
 
             }
             else
             {
                 Console.WriteLine("Attacker lost");
-                attackerP.addDices((attacker.Dices - 1) * -1);
+                attackerP.Dices += ((attacker.Dices - 1) * -1);
                 attacker.Dices = 1;
-                //MaHa
-                DiceLabels.GetInstance.changeLabel(attacker.GridPositionY, attacker.GridPositionX, attacker.Dices);
-                //
             }
 
             if (defenderP.Fields == 0)
@@ -582,7 +572,6 @@ namespace Hexagonal
         /// <returns>List of hexes that are connected containing the start hex</returns>
         public ArrayList getPatch(Hex hex, ArrayList visited)
         {
-            //Console.WriteLine(hex.ToString());
             visited.Add(hex);
             for (int x = -1; x <= 1; x++)
             {
@@ -606,7 +595,6 @@ namespace Hexagonal
                 }
                 for (int y = yStart; y <= yEnd; y++)
                 {
-                    //Console.WriteLine("i:" + i +",j:" + j+ "{x:" + (start.GridPositionX + i) + ", y:" + (start.GridPositionY + j) + "}");
                     if (!(x == 0 && y == 0) && !(hex.GridPositionX + x < 0 || hex.GridPositionX + x >= this.width || hex.GridPositionY + y < 0 || hex.GridPositionY + y >= this.height))
                     {
                         Hex neighbor = this.Hexes[(hex.GridPositionY + y), (hex.GridPositionX + x)];
@@ -630,7 +618,6 @@ namespace Hexagonal
                 Hex randomHex = (Hex)fields[RANDOM.Next(fields.Count)];
                 if (randomHex.Dices < MAX_DICE) 
                 {
-                    Console.WriteLine(dice + "give field 1:" + randomHex.ToString());
                     randomHex.Dices += 1;
                     dice -= 1;
                 }

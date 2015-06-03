@@ -29,15 +29,10 @@ namespace Hexagonal
             this.labels = labels;
         }
 
-        public void changeLabel(int x, int y, int dices, Color backColor)
+        public void update(Hex hex)
         {
-            labels[x, y].Text = dices.ToString();
-            labels[x, y].BackColor = backColor;
-        }
-
-        public void changeLabel(int x, int y, int dices)
-        {
-            labels[x, y].Text = dices.ToString();
+            labels[hex.GridPositionY, hex.GridPositionX].Text = hex.Dices.ToString();
+            labels[hex.GridPositionY, hex.GridPositionX].BackColor = hex.HexState.BackgroundColor;
         }
     }
 }

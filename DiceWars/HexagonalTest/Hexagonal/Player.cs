@@ -94,11 +94,6 @@ namespace Hexagonal
                 this.dices = value;
             }
         }
-
-        public void addDices(int dices)
-        {
-            this.dices += dices;
-        }
     }
 
 

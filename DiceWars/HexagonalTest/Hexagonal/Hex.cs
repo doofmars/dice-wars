@@ -227,6 +227,7 @@ namespace Hexagonal
             set
             {
                 dices = value;
+                DiceLabels.GetInstance.update(this);
             }
         }
 
