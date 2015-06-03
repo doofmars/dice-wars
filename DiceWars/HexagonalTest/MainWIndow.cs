@@ -114,12 +114,14 @@ namespace HexagonalTest
             
 
             HexagonalTest.Stats statsForm = new HexagonalTest.Stats();
-            statsForm.Show();
 
-            //database.getData();
-            
-           // database.closeDatabase();
-
+            //Try to open the statistic form, but check if data exists in the Database or not!
+            try
+            {
+                statsForm.Show();
+            }catch(Exception error){
+                Console.WriteLine(error.ToString());
+            }
 
         }
 

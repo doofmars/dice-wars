@@ -10,9 +10,18 @@ namespace HexagonalTest
 {
     public partial class GameOver : Form
     {
-        public GameOver()
+      
+        public GameOver(string nameOfPlayer)
         {
-            InitializeComponent();
+            InitializeComponent(nameOfPlayer);
+        }
+
+        private void buttonContinue_Click(object sender, EventArgs e)
+        {
+            this.Close();
+            HexagonalTest.WinnerName winForm = new HexagonalTest.WinnerName();
+            winForm.Show();
+
         }
     }
 }

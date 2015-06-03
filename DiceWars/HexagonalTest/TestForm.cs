@@ -10,6 +10,7 @@ using Hexagonal;
 using System.Diagnostics;
 using System.Windows.Forms;
 using System.Drawing;
+using HexagonalTest.Datenbank;
 
 namespace HexagonalTest
 {
@@ -35,6 +36,7 @@ namespace HexagonalTest
 			labelXY.Text = e.X.ToString() + "," + e.Y.ToString();
 
 		}
+     
 
 		private void startGame()
 		{
@@ -65,6 +67,7 @@ namespace HexagonalTest
 
             DiceLabels.GetInstance.addLabels(this.labels);
             // -- End
+           
 		}
 
 		private void Form_MouseClick(object sender, MouseEventArgs e)
