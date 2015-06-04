@@ -436,36 +436,6 @@ namespace Hexagonal
             }
         }
 
-        private Player getPlayerByID(int id)
-        {
-            return (Player)this.players[id];
-        }
-
-        /// <summary>
-        /// Function to get the color of the ActivePlayer
-        /// </summary>
-        /// <returns>A Color</returns>
-        public Color getCurrentPlayerColor()
-        {
-            return ((Player)this.players[this.boardState.ActivePlayer]).Color;
-        }
-
-        /// <summary>
-        /// Function to find a player by its color
-        /// </summary>
-        /// <param name="color">The color of the player</param>
-        /// <returns>The player object</returns>
-        private Player findPlayerByColor(Color color)
-        {
-            foreach (Player player in players)
-            {
-                if (player.Color == color)
-                {
-                    return player;
-                }
-            }
-            throw new ArgumentException("This should never have happend and I'm really sorry");
-        }
 
         /// <summary>
         /// This function is triggered, when an player attacks another player
@@ -522,7 +492,6 @@ namespace Hexagonal
             {
                 //Triggered if player has won
                 Console.WriteLine(attackerP.Color.Name + " has won.");
-
             }
         }
 
@@ -538,6 +507,11 @@ namespace Hexagonal
             }
         }
 
+        /// <summary>
+        /// Get all fields as list for the player
+        /// </summary>
+        /// <param name="playerColor">The players color</param>
+        /// <returns>The fields</returns>
         private ArrayList getFieldsForPlayer(Color playerColor)
         {
             ArrayList fields = new ArrayList();
@@ -633,6 +607,11 @@ namespace Hexagonal
             return visited;
         }
 
+        /// <summary>
+        /// Function to give the given player new dices
+        /// </summary>
+        /// <param name="player">The player</param>
+        /// <param name="dice">number of dices</param>
         private void distributeDices(Player player, int dice)
         {
             ArrayList fields = getFieldsForPlayer(player.Color);
@@ -656,7 +635,42 @@ namespace Hexagonal
             {
                 player.Bank = dice;
             }
-            
+        }
+
+        /// <summary>
+        /// Function to find a player by its id
+        /// </summary>
+        /// <param name="id">the players id</param>
+        /// <returns>The Player</returns>
+        private Player getPlayerByID(int id)
+        {
+            return (Player)this.players[id];
+        }
+
+        /// <summary>
+        /// Function to get the color of the ActivePlayer
+        /// </summary>
+        /// <returns>A Color</returns>
+        public Color getCurrentPlayerColor()
+        {
+            return ((Player)this.players[this.boardState.ActivePlayer]).Color;
+        }
+
+        /// <summary>
+        /// Function to find a player by its color
+        /// </summary>
+        /// <param name="color">The color of the player</param>
+        /// <returns>The player object</returns>
+        private Player findPlayerByColor(Color color)
+        {
+            foreach (Player player in players)
+            {
+                if (player.Color == color)
+                {
+                    return player;
+                }
+            }
+            throw new ArgumentException("This should never have happend and I'm really sorry");
         }
 
         /// <summary>
