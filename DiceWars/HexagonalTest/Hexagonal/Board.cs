@@ -737,7 +737,10 @@ namespace Hexagonal
             String status = "";
             foreach (Player player in players)
             {
-                status += player.Color.Name + "=" + player.Fields + "(" + player.Dices + ")     ";
+                if (player.Fields > 0)
+                {
+                    status += player.Color.Name + "=" + player.Fields + "(" + player.Dices + ")     ";
+                }
             }
             return status;
         }
