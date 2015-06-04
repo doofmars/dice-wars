@@ -92,14 +92,14 @@ namespace HexagonalTest
 				}
 				else
 				{
-                    if (e.Button == MouseButtons.Right)
-                    {
-                        Console.WriteLine("Hex " + clickedHex + " was clicked." + "Hex has " + clickedHex.Dices + " Dices");
-                        return;
-                    }
 
                     if (board.getCurrentPlayerColor() == clickedHex.HexState.BackgroundColor) 
                     {
+                        if (e.Button == MouseButtons.Right)
+                        {
+                            Console.WriteLine("Hex " + clickedHex + " was clicked." + "Hex has " + clickedHex.Dices + " Dices");
+                            board.moveDices(board.BoardState.ActiveHex, clickedHex);
+                        }
                         board.BoardState.ActiveHex = clickedHex;
                         labelAttacker.BackColor = board.getCurrentPlayerColor();
                         labelDefender.BackColor = Color.LightGray;

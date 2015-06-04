@@ -436,6 +436,21 @@ namespace Hexagonal
             }
         }
 
+        public void moveDices(Hex from, Hex to)
+        {
+            if (from != null && !from.IsNeighbor(to))
+            {
+                return;
+            }
+            if (from.Dices > 2)
+            {
+                int modulo = from.Dices % 3;
+                int transfer = (int)((from.Dices - modulo) * (2.0/3.0));
+                from.Dices -= transfer;
+                to.Dices += transfer;
+            }
+        }
+
 
         /// <summary>
         /// This function is triggered, when an player attacks another player
