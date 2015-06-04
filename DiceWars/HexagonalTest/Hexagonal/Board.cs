@@ -446,6 +446,10 @@ namespace Hexagonal
             {
                 int modulo = from.Dices % 3;
                 int transfer = (int)((from.Dices - modulo) * (2.0/3.0));
+                if (to.Dices + transfer > MAX_DICE)
+                {
+                    transfer = MAX_DICE - to.Dices;
+                }
                 from.Dices -= transfer;
                 to.Dices += transfer;
             }
