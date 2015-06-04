@@ -7,6 +7,6 @@ namespace Hexagonal
 {
     class PlayerColors
     {
-        public readonly static Color[] colors = {Color.Red, Color.Blue, Color.Green, Color.Yellow, Color.Orange, Color.Violet, Color.SkyBlue, Color.White}; 
+        public readonly static Color[] colors = {Color.Red, Color.CornflowerBlue, Color.Green, Color.Yellow, Color.Orange, Color.Violet, Color.SkyBlue, Color.White}; 
     }
 }
