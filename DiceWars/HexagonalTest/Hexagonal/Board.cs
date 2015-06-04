@@ -30,6 +30,7 @@ namespace Hexagonal
 
         private static readonly Random RANDOM = new Random();
         private static readonly int MAX_DICE = 9;
+        private List<int> fieldHelper;
 
 		#region Properties
 
@@ -160,6 +161,19 @@ namespace Hexagonal
 			float h = Hexagonal.Math.CalculateH(side); // short side
 			float r = Hexagonal.Math.CalculateR(side); // long side
 
+            //Initalize, fill and shuffle field helper to give each player the same amount of fields on the start
+            this.fieldHelper = new List<int>(width*height);
+            int f = 0;
+            while(f < fieldHelper.Capacity) 
+            {
+                for (int p = players.Count - 1; p >= 0 && f < fieldHelper.Capacity; p--)
+                {
+                    fieldHelper.Add(p);
+                    f++;
+                }
+            }
+            Math.Shuffle<int>(fieldHelper);
+
 			//
 			// Calculate pixel info..remove?
 			// because of staggering, need to add an extra r/h
@@ -193,14 +207,18 @@ namespace Hexagonal
 			bool isBotomLeft = false;
 			bool isBottomRight = false;
 
-
+            // f = field number in 2D plane
+            f = 0;
 			// i = y coordinate (rows), j = x coordinate (columns) of the hex tiles 2D plane
 			for (int i = 0; i < height; i++)
 			{
 				for (int j = 0; j < width; j++)
 				{
-                    Player randomPlayer = getRandomPlayer();
-                    Hex current = new Hex(side, orientation, randomPlayer.Color, j, i, 5);
+                    Player player = getPlayerByID(fieldHelper[f]);
+                    player.addField();
+                    player.Dices += 1;
+                    Hex current = new Hex(side, orientation, player.Color, j, i, 1);
+                    f++;
 					// Set position booleans
 					#region Position Booleans
 						if (i == 0)
@@ -386,24 +404,22 @@ namespace Hexagonal
 
 				}
 			}
+            //Give players extra dices at the start.
+            //Each player gets total number of fields minus his largest patch plus MAX_DICE
+            foreach (Player player in players)
+            {
+                int largestPatch = findLargesPatchForPlayer(player);
+                this.distributeDices(player, (width*height) - largestPatch + MAX_DICE);
+            }
             Console.WriteLine(getStatus());		
 		}
-
-        /// This function is pretty nasty because the default c# random function cant provide enough entropy
-        private Player getRandomPlayer()
-        {
-            Player candidate = (Player)players[RANDOM.Next(0, players.Count)];
-            candidate.addField();
-            candidate.Dices += 5;
-            return candidate;
-        }
 
         /// <summary>
         /// Function to set the Active player to be the next player
         /// </summary>
         public void nextPlayer()
         {
-            Player currentPlayer = this.getCurrentPlayerByID();
+            Player currentPlayer = this.getPlayerByID(this.boardState.ActivePlayer);
             int largestPatch = findLargesPatchForPlayer(currentPlayer);
 
             this.distributeDices(currentPlayer, largestPatch);
@@ -420,9 +436,9 @@ namespace Hexagonal
             }
         }
 
-        private Player getCurrentPlayerByID()
+        private Player getPlayerByID(int id)
         {
-            return (Player)this.players[this.boardState.ActivePlayer];
+            return (Player)this.players[id];
         }
 
         /// <summary>
@@ -629,6 +645,7 @@ namespace Hexagonal
                 Hex randomHex = (Hex)fields[RANDOM.Next(fields.Count)];
                 if (randomHex.Dices < MAX_DICE) 
                 {
+                    player.Dices += 1;
                     randomHex.Dices += 1;
                     dice -= 1;
                 }
