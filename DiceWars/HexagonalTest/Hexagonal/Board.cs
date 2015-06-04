@@ -478,6 +478,7 @@ namespace Hexagonal
             if (attacker.Dices <= 1) 
             {
                 Console.WriteLine("Attack not possible");
+                DiceLabels.GetInstance.changeGameLabel(attacker.HexState.BackgroundColor, "Not possible");
                 return;
             }
             Player attackerP = findPlayerByColor(attacker.HexState.BackgroundColor);
@@ -486,10 +487,7 @@ namespace Hexagonal
             int defenderEyes = rollTheDice(defender.Dices);
 
             //
-            //AttackPerformedPopUp popup = new AttackPerformedPopUp(attackerP.Color, defenderP.Color, attackerEyes, defenderEyes);
-            //DialogResult dialogresult = popup.ShowDialog();
             DiceLabels.GetInstance.changeGameLabel(attackerP.Color, defenderP.Color, attackerEyes, defenderEyes);
-
             //
 
             Console.WriteLine("Attacker Eyes:" + attackerEyes + " Defender Eyes:" + defenderEyes);

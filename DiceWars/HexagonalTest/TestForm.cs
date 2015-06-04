@@ -8,8 +8,6 @@ using System.Text;
 using System.Windows.Forms;
 using Hexagonal;
 using System.Diagnostics;
-using System.Windows.Forms;
-using System.Drawing;
 using HexagonalTest.Datenbank;
 
 namespace HexagonalTest
@@ -103,6 +101,10 @@ namespace HexagonalTest
                     if (board.getCurrentPlayerColor() == clickedHex.HexState.BackgroundColor) 
                     {
                         board.BoardState.ActiveHex = clickedHex;
+                        labelAttacker.BackColor = board.getCurrentPlayerColor();
+                        labelDefender.BackColor = Color.LightGray;
+                        labelDefenderDices.Text = "";
+                        labelAttackerDices.Text = "";
                     }
                     else if (clickedHex.IsNeighbor(board.BoardState.ActiveHex)) 
                     {

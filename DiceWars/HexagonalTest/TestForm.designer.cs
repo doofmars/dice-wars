@@ -149,9 +149,9 @@ namespace HexagonalTest
             this.labelAttacker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAttacker.AutoSize = true;
             this.labelAttacker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAttacker.Location = new System.Drawing.Point(dynamicPos, 160);
+            this.labelAttacker.Location = new System.Drawing.Point(dynamicPos, 140);
             this.labelAttacker.Name = "labelAttacker";
-            this.labelAttacker.Size = new System.Drawing.Size(68, 13);
+            this.labelAttacker.Size = new System.Drawing.Size(68, 10);
             this.labelAttacker.TabIndex = 10;
             this.labelAttacker.Text = "Attacker";
 
@@ -161,9 +161,9 @@ namespace HexagonalTest
             this.labelDefender.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDefender.AutoSize = true;
             this.labelDefender.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDefender.Location = new System.Drawing.Point(dynamicPos, 200);
+            this.labelDefender.Location = new System.Drawing.Point(dynamicPos, 180);
             this.labelDefender.Name = "labelDefender";
-            this.labelDefender.Size = new System.Drawing.Size(68, 13);
+            this.labelDefender.Size = new System.Drawing.Size(68, 10);
             this.labelDefender.TabIndex = 10;
             this.labelDefender.Text = "Defender";
             // 
@@ -172,9 +172,9 @@ namespace HexagonalTest
             this.labelDefenderDices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelDefenderDices.AutoSize = true;
             this.labelDefenderDices.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelDefenderDices.Location = new System.Drawing.Point(dynamicPos, 220);
+            this.labelDefenderDices.Location = new System.Drawing.Point(dynamicPos, 195);
             this.labelDefenderDices.Name = "labelDefenderDices";
-            this.labelDefenderDices.Size = new System.Drawing.Size(68, 13);
+            this.labelDefenderDices.Size = new System.Drawing.Size(68, 10);
             this.labelDefenderDices.TabIndex = 10;
             this.labelDefenderDices.Text = "0";
 
@@ -184,9 +184,9 @@ namespace HexagonalTest
             this.labelAttackerDices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.labelAttackerDices.AutoSize = true;
             this.labelAttackerDices.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.labelAttackerDices.Location = new System.Drawing.Point(dynamicPos, 180);
+            this.labelAttackerDices.Location = new System.Drawing.Point(dynamicPos, 155);
             this.labelAttackerDices.Name = "labelAttackerDices";
-            this.labelAttackerDices.Size = new System.Drawing.Size(68, 13);
+            this.labelAttackerDices.Size = new System.Drawing.Size(68, 10);
             this.labelAttackerDices.TabIndex = 10;
             this.labelAttackerDices.Text = "0";
 

@@ -49,6 +49,12 @@ namespace Hexagonal
             labelDefender.BackColor = defender;
             labelAttackerDices.Text = attackerEyes.ToString();
             labelDefenderDices.Text = defenderEyes.ToString();
+        }
+
+        public void changeGameLabel(Color attacker, String sMessage)
+        {
+            labelAttacker.BackColor = attacker;
+            labelAttackerDices.Text = sMessage;
 
         }
 
