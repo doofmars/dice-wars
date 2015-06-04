@@ -31,6 +31,10 @@ namespace Hexagonal
 
         public void update(Hex hex)
         {
+            if (labels == null) 
+            { 
+                return; 
+            }
             labels[hex.GridPositionY, hex.GridPositionX].Text = hex.Dices.ToString();
             labels[hex.GridPositionY, hex.GridPositionX].BackColor = hex.HexState.BackgroundColor;
         }
