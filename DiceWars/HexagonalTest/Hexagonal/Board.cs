@@ -469,6 +469,13 @@ namespace Hexagonal
             int attackerEyes = rollTheDice(attacker.Dices);
             int defenderEyes = rollTheDice(defender.Dices);
 
+            //
+            AttackPerformedPopUp popup = new AttackPerformedPopUp(attackerP.Color, defenderP.Color, attackerEyes, defenderEyes);
+            DialogResult dialogresult = popup.ShowDialog();
+
+
+            //
+
             Console.WriteLine("Attacker Eyes:" + attackerEyes + " Defender Eyes:" + defenderEyes);
             if (attackerEyes > defenderEyes)
             {

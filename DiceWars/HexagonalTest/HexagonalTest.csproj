@@ -46,6 +46,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AttackPerformedPopUp.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AttackPerformedPopUp.Designer.cs">
+      <DependentUpon>AttackPerformedPopUp.cs</DependentUpon>
+    </Compile>
     <Compile Include="Datenbank\SqliteDatabase.cs" />
     <Compile Include="GameOver.cs">
       <SubType>Form</SubType>
@@ -99,6 +105,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="AttackPerformedPopUp.resx">
+      <DependentUpon>AttackPerformedPopUp.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GameOver.resx">
       <DependentUpon>GameOver.cs</DependentUpon>
     </EmbeddedResource>
