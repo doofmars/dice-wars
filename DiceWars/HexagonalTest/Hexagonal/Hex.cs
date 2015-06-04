@@ -23,6 +23,7 @@ namespace Hexagonal
         private int gridPosY;
 		private HexState hexState;
         private int dices;
+        private bool exhausted;
 	
         /// <summary>
         /// Constructor to initalize the Hexagon with the fixed values
@@ -239,6 +240,18 @@ namespace Hexagonal
 			}
 			set
 			{
+			}
+		}
+
+        public bool Exhausted
+		{
+			get
+			{
+                return exhausted;
+			}
+			set
+			{
+                exhausted = value;
 			}
 		}
 

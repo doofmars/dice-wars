@@ -436,10 +436,17 @@ namespace Hexagonal
             }
         }
 
+        /// <summary>
+        /// Function to move 2/3 of the units from an hex to anoter
+        /// From hex must be not null, not exhausted and neighbor of to
+        /// </summary>
+        /// <param name="from">Units to move from</param>
+        /// <param name="to">Units to move to</param>
         public void moveDices(Hex from, Hex to)
         {
-            if (from != null && !from.IsNeighbor(to))
+            if (from != null && from.Exhausted && !from.IsNeighbor(to))
             {
+                Console.WriteLine("Move of units not possible");
                 return;
             }
             if (from.Dices > 2)
@@ -452,6 +459,7 @@ namespace Hexagonal
                 }
                 from.Dices -= transfer;
                 to.Dices += transfer;
+                to.Exhausted = true;
             }
         }
 
@@ -464,7 +472,7 @@ namespace Hexagonal
         public void performAttack(Hex attacker, Hex defender)
         {
             Console.WriteLine("Attacker:" + attacker.Dices + " Defender:" + defender.Dices);
-            if (attacker.Dices <= 1) 
+            if (attacker.Dices <= 1 || attacker.Exhausted) 
             {
                 Console.WriteLine("Attack not possible");
                 DiceLabels.GetInstance.changeGameLabel(attacker.HexState.BackgroundColor, "Not possible");
@@ -537,9 +545,11 @@ namespace Hexagonal
             {
                 for (int y = 0; y < this.width; y++)
                 {
-                    if (this.Hexes[x, y].HexState.BackgroundColor == playerColor)
+                    Hex field = this.Hexes[x, y];
+                    if (field.HexState.BackgroundColor == playerColor)
                     {
-                        fields.Add(this.Hexes[x, y]);
+                        field.Exhausted = false; //reset exhausted state
+                        fields.Add(field);
                     }
                 }
             }
