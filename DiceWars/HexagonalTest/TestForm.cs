@@ -59,6 +59,7 @@ namespace HexagonalTest
                     labels[i, j].BackColor = board.Hexes[i, j].HexState.BackgroundColor;
                     labels[i, j].Size = new System.Drawing.Size(13, 15);
                     labels[i, j].Location = new Point(tmpX[i, j] + POSX, tmpY[i, j] + POSY);
+                    labels[i, j].Click += new EventHandler(Lable_MouseClick);
                     this.Controls.Add(labels[i, j]);
                 }
             }
@@ -115,6 +116,21 @@ namespace HexagonalTest
             //Update status lable
             lable_players.Text = this.board.getStatus();
 		}
+
+        /// <summary>
+        /// Proxy to trigger from an lable click the Form click event
+        /// </summary>
+        /// <param name="sender">An Lable</param>
+        /// <param name="e">position event</param>
+        private void Lable_MouseClick(object sender, EventArgs e) 
+        {
+            if (e is MouseEventArgs && sender is Label)
+            {
+                //whats wrong with carsten? 
+                MouseEventArgs newEvent = new MouseEventArgs(((MouseEventArgs)e).Button, ((MouseEventArgs)e).Clicks, ((Label)sender).Bounds.X, ((Label)sender).Bounds.Y, ((MouseEventArgs)e).Delta);
+                Form_MouseClick(sender, newEvent);
+            }
+        }
 
 		private void Form_Paint(object sender, PaintEventArgs e)
 		{
