@@ -17,7 +17,6 @@ namespace HexagonalTest
 
         private void buttonSaveName_Click(object sender, EventArgs e)
         {
-            textBoxWinnerName.Clear();
             
             if (String.IsNullOrEmpty(textBoxWinnerName.Text))
             {

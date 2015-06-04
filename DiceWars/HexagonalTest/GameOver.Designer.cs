@@ -55,7 +55,7 @@
             this.labelPlayerLost.TabIndex = 1;
             this.labelPlayerLost.ForeColor = System.Drawing.Color.White;
             
-            this.labelPlayerLost.Text = player + " has lost";
+            this.labelPlayerLost.Text = player + " Player is the winner!";
             // 
             // buttonContinue
             // 

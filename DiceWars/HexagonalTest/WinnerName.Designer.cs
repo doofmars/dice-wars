@@ -49,6 +49,7 @@
             this.buttonSaveName.TabIndex = 1;
             this.buttonSaveName.Text = "Save";
             this.buttonSaveName.UseVisualStyleBackColor = true;
+            this.buttonSaveName.ForeColor = System.Drawing.Color.White;
             this.buttonSaveName.Click += new System.EventHandler(this.buttonSaveName_Click);
             // 
             // pictureBox1
