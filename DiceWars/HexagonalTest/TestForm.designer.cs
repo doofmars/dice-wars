@@ -81,6 +81,10 @@ namespace HexagonalTest
             this.bt_end = new System.Windows.Forms.Button();
             this.current_player = new System.Windows.Forms.Panel();
             this.lable_players = new System.Windows.Forms.Label();
+            this.labelAttacker = new System.Windows.Forms.Label();
+            this.labelDefender = new System.Windows.Forms.Label();
+            this.labelDefenderDices = new System.Windows.Forms.Label();
+            this.labelAttackerDices = new System.Windows.Forms.Label();
             
             this.SuspendLayout();
             // 
@@ -140,6 +144,54 @@ namespace HexagonalTest
             this.lable_players.TabIndex = 13;
             this.lable_players.Text = "label1";
             // 
+            // LabelAttacker
+            // 
+            this.labelAttacker.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelAttacker.AutoSize = true;
+            this.labelAttacker.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAttacker.Location = new System.Drawing.Point(dynamicPos, 160);
+            this.labelAttacker.Name = "labelAttacker";
+            this.labelAttacker.Size = new System.Drawing.Size(68, 13);
+            this.labelAttacker.TabIndex = 10;
+            this.labelAttacker.Text = "Attacker";
+
+            // 
+            // LabelDefender
+            // 
+            this.labelDefender.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelDefender.AutoSize = true;
+            this.labelDefender.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDefender.Location = new System.Drawing.Point(dynamicPos, 200);
+            this.labelDefender.Name = "labelDefender";
+            this.labelDefender.Size = new System.Drawing.Size(68, 13);
+            this.labelDefender.TabIndex = 10;
+            this.labelDefender.Text = "Defender";
+            // 
+            // LabelDefenderDices
+            // 
+            this.labelDefenderDices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelDefenderDices.AutoSize = true;
+            this.labelDefenderDices.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelDefenderDices.Location = new System.Drawing.Point(dynamicPos, 220);
+            this.labelDefenderDices.Name = "labelDefenderDices";
+            this.labelDefenderDices.Size = new System.Drawing.Size(68, 13);
+            this.labelDefenderDices.TabIndex = 10;
+            this.labelDefenderDices.Text = "0";
+
+            // 
+            // LabelAttackerDices
+            // 
+            this.labelAttackerDices.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.labelAttackerDices.AutoSize = true;
+            this.labelAttackerDices.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.labelAttackerDices.Location = new System.Drawing.Point(dynamicPos, 180);
+            this.labelAttackerDices.Name = "labelAttackerDices";
+            this.labelAttackerDices.Size = new System.Drawing.Size(68, 13);
+            this.labelAttackerDices.TabIndex = 10;
+            this.labelAttackerDices.Text = "0";
+
+
+            // 
             // Fight
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -150,6 +202,10 @@ namespace HexagonalTest
             this.Controls.Add(this.bt_end);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.labelXY);
+            this.Controls.Add(this.labelAttacker);
+            this.Controls.Add(this.labelDefender);
+            this.Controls.Add(this.labelAttackerDices);
+            this.Controls.Add(this.labelDefenderDices);
             this.DoubleBuffered = true;
             this.Name = "Fight";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -175,6 +231,10 @@ namespace HexagonalTest
         private System.Windows.Forms.Button bt_end;
         private System.Windows.Forms.Panel current_player;
         private System.Windows.Forms.Label lable_players;
+        private System.Windows.Forms.Label labelAttacker;
+        private System.Windows.Forms.Label labelDefender;
+        private System.Windows.Forms.Label labelAttackerDices;
+        private System.Windows.Forms.Label labelDefenderDices;
     
        
 	}

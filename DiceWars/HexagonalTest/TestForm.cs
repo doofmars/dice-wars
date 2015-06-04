@@ -66,6 +66,8 @@ namespace HexagonalTest
             }
 
             DiceLabels.GetInstance.addLabels(this.labels);
+
+            DiceLabels.GetInstance.addGameLabels(this.labelAttacker, this.labelDefender, this.labelAttackerDices, this.labelDefenderDices);
             // -- End
            
 		}

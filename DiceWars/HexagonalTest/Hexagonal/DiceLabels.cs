@@ -10,7 +10,13 @@ namespace Hexagonal
     {
         private DiceLabels() { }
         private static DiceLabels instance = null;
-        private Label[,] labels; 
+        private Label[,] labels;
+
+
+        private Label labelAttacker;
+        private Label labelDefender;
+        private Label labelAttackerDices;
+        private Label labelDefenderDices;
 
         public static DiceLabels GetInstance
         {
@@ -27,6 +33,23 @@ namespace Hexagonal
         public void addLabels(Label[,] labels)
         {
             this.labels = labels;
+        }
+
+        public void addGameLabels(Label attack, Label defend, Label attackDice, Label defendDice)
+        {
+            labelAttacker = attack;
+            labelDefender = defend;
+            labelAttackerDices = attackDice;
+            labelDefenderDices = defendDice;
+        }
+
+        public void changeGameLabel(Color attacker, Color defender, int attackerEyes, int defenderEyes)
+        {
+            labelAttacker.BackColor = attacker;
+            labelDefender.BackColor = defender;
+            labelAttackerDices.Text = attackerEyes.ToString();
+            labelDefenderDices.Text = defenderEyes.ToString();
+
         }
 
         public void update(Hex hex)
