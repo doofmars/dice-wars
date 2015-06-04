@@ -424,15 +424,41 @@ namespace Hexagonal
 
             this.distributeDices(currentPlayer, largestPatch);
             Console.WriteLine("Dice to distribute: " + largestPatch);
-            Console.WriteLine("Current Bank" + currentPlayer.Bank);
+            Console.WriteLine("Current Bank " + currentPlayer.Bank);
 
-            if (currentPlayer.ID + 1 >= players.Count)
+            boardState.ActivePlayer = nextActivePlayer(currentPlayer.ID);
+        }
+
+        /// <summary>
+        /// Select next player and test if he still has fields
+        /// Either return this player or select next one via recursion
+        /// </summary>
+        /// <param name="currentPlayerId">The current players id uses for recursion</param>
+        /// <returns>the next player who still has fields</returns>
+        private int nextActivePlayer(int currentPlayerId)
+        {
+            //next Player:
+            if (currentPlayerId + 1 >= players.Count)
             {
-                boardState.ActivePlayer = 0;
+                currentPlayerId = 0;
             }
             else
             {
-                boardState.ActivePlayer = currentPlayer.ID + 1;
+                currentPlayerId = currentPlayerId + 1;
+            }
+            //termination condition for recursion, prevents stack overflow.
+            if (currentPlayerId == boardState.ActivePlayer)
+            {
+                return boardState.ActivePlayer;
+            }
+            //test if player has fields or find next player recursive 
+            if (getPlayerByID(currentPlayerId).Fields > 0)
+            {
+                return currentPlayerId;
+            }
+            else
+            {
+                return nextActivePlayer(currentPlayerId);
             }
         }
 
@@ -661,6 +687,7 @@ namespace Hexagonal
             }
             if (dice > 0)
             {
+                player.Dices += dice;
                 player.Bank = dice;
             }
         }
