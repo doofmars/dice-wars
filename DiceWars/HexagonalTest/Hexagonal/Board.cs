@@ -444,7 +444,7 @@ namespace Hexagonal
         /// <param name="to">Units to move to</param>
         public void moveDices(Hex from, Hex to)
         {
-            if (from != null && from.Exhausted && !from.IsNeighbor(to))
+            if (from == null || !from.IsNeighbor(to) || from.Exhausted)
             {
                 Console.WriteLine("Move of units not possible");
                 return;
