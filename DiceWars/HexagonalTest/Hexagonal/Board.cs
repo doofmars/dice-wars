@@ -484,14 +484,13 @@ namespace Hexagonal
             {
                 //Triggered when player is defeated
                 Console.WriteLine(defenderP.Color.Name + " has been defeated.");
-                HexagonalTest.GameOver gameOverForm = new HexagonalTest.GameOver(attackerP.Color.Name);
-                gameOverForm.Show();
-                
             }
             if (attackerP.Fields == this.width * this.height)
             {
                 //Triggered if player has won
                 Console.WriteLine(attackerP.Color.Name + " has won.");
+                HexagonalTest.GameOver gameOverForm = new HexagonalTest.GameOver(attackerP.Color.Name);
+                gameOverForm.Show();
             }
         }
 
