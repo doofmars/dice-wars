@@ -11,6 +11,11 @@ namespace Hexagonal
         private static RandomGenerator instance;
         private static readonly Random RANDOM = new Random();
 
+        private RandomGenerator()
+        {
+
+        }
+
         public static RandomGenerator getInstance()
         {
             if (instance == null)
@@ -71,7 +76,7 @@ namespace Hexagonal
 
             if (data != string.Empty)
             {
-                //Parse the data
+                //Parse the data (data is HTML code of the result site)
                 string startMarker = "<pre class=" + '"' + "data" + '"' + ">"; //<pre class="data">
                 int j = data.IndexOf(startMarker);
                 if (j != -1)
@@ -117,7 +122,6 @@ namespace Hexagonal
                 int dataLength = (int)response.ContentLength;
 
                 //Download to memory
-                //Note: adjust the streams here to download directly to the hard drive
                 MemoryStream memStream = new MemoryStream();
                 while (true)
                 {

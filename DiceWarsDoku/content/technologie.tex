@@ -1,3 +1,7 @@
 \chapter{Verwendete Technologien}  
 
-hier kommt phil
+Random.org API\\ \\
+
+Um beim Würfeln richtige und keine Pseudo-Zufallszahlen zu bekommen, greifen wir auf die Random.org API zu. Diese liefert Zufallszahlen in Abhängigkeit vom Weltraumrauschen und wird deshalb von Lotterien, Casinos und Online-Spielen benutzt, da es sich um wahre Zufallszahlen handelt und nicht um Pseudo-Zufallszahlen, die ein Computer generiert.\\
+Die Implementierung findet sich in der Klasse RandomGenerator. Diese Klasse enthält die öffentliche Methode "public int rollTheDices(int dices)". Diese Methode ruft random.org auf mit passenden Übergabeparametern (kleinst mögliche Zahl, größt mögliche Zahl, Anzahl Zahlen) auf. Das Ergebnis (bzw. der HTML Code der Ergebnis-Seite) wird mit der Methode "DownloadData" heruntergeladen. Dieser muss dann erst noch geparst werden, also die generierten Zahlen aus dem HTML-Code herausgefilert und in einem Integer-Array gespeichert werden. Da es bei diesem Spiel nur um die Summe aller Augenwürfel geht, werden alle Zahlen des Integer-Arrays anschließend addiert und die Summe als Rückgabewert zurückgegeben.\\
+Sollte dabei ein Fehler auftreten (z.B. weil der Rechner gerade keine Internetverbindung hat), wird die rekursive Methode "rollTheDiceOffline" aufgerufen, die Pseudo-Zufallszahlen generiert und die Summe davon zurückgibt. Somit ist man nicht auf eine Internetverbindung beim Spielen angewiesen.

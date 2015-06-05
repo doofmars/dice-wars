@@ -1,3 +1,5 @@
 \chapter{Verwendete Design-Pattern}  
 
-  hier kommt phil
+RandomGenerator (Singleton)\\ \\
+
+Den Zufallsgenerator, der wahre Zufallszahlen mit Hilfe von der Random.org API generiert, haben wir als Singleton implementiert. Von dem RandomGenerator soll es nur eine Instanz geben. Man ruft von außen nur die Methode "rollTheDice" auf (diese generiert dann, je nachdem ob man eine Internetverbindung hat oder nicht, richtige oder Pseudo-Zufallszahlen und gibt deren Summe zurück). Mehrere Instanzen eines RandomGenerators anzulegen wäre daher nicht sinnvoll, da die Methode "rollTheDice" nie mehrmals parallel aufgerufen werden muss.
