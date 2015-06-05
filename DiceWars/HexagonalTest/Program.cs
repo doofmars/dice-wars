@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Hexagonal;
 
 
 namespace HexagonalTest
@@ -10,10 +11,9 @@ namespace HexagonalTest
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Starting Form...");
+            RandomGenerator.getInstance().initialize();
 			//System.Windows.Forms.Application.Run(new HexagonalTest.TestForm() );
-            System.Windows.Forms.Application.Run(new HexagonalTest.MainWIndow());
-            
-            
+            System.Windows.Forms.Application.Run(new HexagonalTest.MainWIndow());            
 		}
 	}
 }

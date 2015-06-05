@@ -53,6 +53,7 @@
     <Compile Include="GameOver.Designer.cs">
       <DependentUpon>GameOver.cs</DependentUpon>
     </Compile>
+    <Compile Include="Hexagonal\RandomGenerator.cs" />
     <Compile Include="MainWIndow.cs">
       <SubType>Form</SubType>
     </Compile>

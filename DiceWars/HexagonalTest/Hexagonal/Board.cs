@@ -28,8 +28,8 @@ namespace Hexagonal
         private float pixelWidth;
 		private float pixelHeight;
 
-        private static readonly Random RANDOM = new Random();
         private static readonly int MAX_DICE = 9;
+        private static readonly Random RANDOM = new Random();
         private List<int> fieldHelper;
 
 		#region Properties
@@ -506,8 +506,8 @@ namespace Hexagonal
             }
             Player attackerP = findPlayerByColor(attacker.HexState.BackgroundColor);
             Player defenderP = findPlayerByColor(defender.HexState.BackgroundColor);
-            int attackerEyes = rollTheDice(attacker.Dices);
-            int defenderEyes = rollTheDice(defender.Dices);
+            int attackerEyes = RandomGenerator.getInstance().rollTheDice(attacker.Dices);
+            int defenderEyes = RandomGenerator.getInstance().rollTheDice(defender.Dices);
 
             //
             DiceLabels.GetInstance.changeGameLabel(attackerP.Color, defenderP.Color, attackerEyes, defenderEyes);
@@ -547,17 +547,6 @@ namespace Hexagonal
             }
         }
 
-        private int rollTheDice(int dices)
-        {
-            if (dices > 0)
-            {
-                return rollTheDice(dices - 1) + RANDOM.Next(1, 7);
-            }
-            else
-            {
-                return 0;
-            }
-        }
 
         /// <summary>
         /// Get all fields as list for the player
