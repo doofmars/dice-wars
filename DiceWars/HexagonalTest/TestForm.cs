@@ -96,16 +96,20 @@ namespace HexagonalTest
 
                     if (board.getCurrentPlayerColor() == clickedHex.HexState.BackgroundColor) 
                     {
+                        bool canMoveDices = true;
                         if (e.Button == MouseButtons.Right)
                         {
                             Console.WriteLine("Hex " + clickedHex + " was clicked." + "Hex has " + clickedHex.Dices + " Dices");
-                            board.moveDices(board.BoardState.ActiveHex, clickedHex);
+                            canMoveDices = board.moveDices(board.BoardState.ActiveHex, clickedHex);
                         }
                         board.BoardState.ActiveHex = clickedHex;
                         labelAttacker.BackColor = board.getCurrentPlayerColor();
                         labelDefender.BackColor = Color.LightGray;
                         labelDefenderDices.Text = "";
-                        labelAttackerDices.Text = "";
+                        if(canMoveDices)
+                        { 
+                            labelAttackerDices.Text = "";
+                        }
                     }
                     else if (clickedHex.IsNeighbor(board.BoardState.ActiveHex)) 
                     {

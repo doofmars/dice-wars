@@ -468,12 +468,13 @@ namespace Hexagonal
         /// </summary>
         /// <param name="from">Units to move from</param>
         /// <param name="to">Units to move to</param>
-        public void moveDices(Hex from, Hex to)
+        public bool moveDices(Hex from, Hex to)
         {
             if (from == null || !from.IsNeighbor(to) || from.Exhausted)
             {
                 Console.WriteLine("Move of units not possible");
-                return;
+                DiceLabels.GetInstance.changeGameLabel(from.HexState.BackgroundColor, "Can't move");
+                return false;
             }
             if (from.Dices > 2)
             {
@@ -486,7 +487,11 @@ namespace Hexagonal
                 from.Dices -= transfer;
                 to.Dices += transfer;
                 to.Exhausted = true;
+
+                DiceLabels.GetInstance.changeGameLabel(from.HexState.BackgroundColor, "Dices moved");
+                return false;
             }
+            return true;
         }
 
 
@@ -501,7 +506,7 @@ namespace Hexagonal
             if (attacker.Dices <= 1 || attacker.Exhausted) 
             {
                 Console.WriteLine("Attack not possible");
-                DiceLabels.GetInstance.changeGameLabel(attacker.HexState.BackgroundColor, "Not possible");
+                DiceLabels.GetInstance.changeGameLabel(attacker.HexState.BackgroundColor, "Not possibl");
                 return;
             }
             Player attackerP = findPlayerByColor(attacker.HexState.BackgroundColor);
