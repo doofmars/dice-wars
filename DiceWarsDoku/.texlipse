@@ -1,5 +1,5 @@
 #TeXlipse project settings
-#Sun Mar 22 20:15:42 CET 2015
+#Sun Jun 07 10:24:06 CEST 2015
 markTmpDer=true
 builderNum=2
 outputDir=
@@ -8,7 +8,7 @@ bibrefDir=
 outputFormat=pdf
 tempDir=tmp
 mainTexFile=main.tex
-outputFile=main.pdf
+outputFile=DiceWarsDoku.pdf
 langSpell=de
 markDer=true
 srcDir=
