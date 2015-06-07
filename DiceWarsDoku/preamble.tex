@@ -39,6 +39,7 @@
 
 % Abbildungen einbinden
 \usepackage{graphicx}
+\usepackage{float}
 
 % Zusaetsliche Sonderzeichen
 \usepackage{dingbat}
@@ -99,6 +100,12 @@
 	\markboth{#1}{}
    	\markboth{\thechapter.\ #1}{}
 }
+
+%Einrücken von Absätzen deaktivieren
+\setlength{\parindent}{0pt}
+
+%Zeilenabstand bei abstätzen
+\usepackage{parskip}
 
 % ##################################################
 % Schriften
