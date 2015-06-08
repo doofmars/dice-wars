@@ -11,7 +11,6 @@ namespace HexagonalTest
 		static void Main(string[] args)
 		{
 			Console.WriteLine("Starting Form...");
-            RandomGenerator.getInstance().initialize();
 			//System.Windows.Forms.Application.Run(new HexagonalTest.TestForm() );
             System.Windows.Forms.Application.Run(new HexagonalTest.MainWIndow());            
 		}

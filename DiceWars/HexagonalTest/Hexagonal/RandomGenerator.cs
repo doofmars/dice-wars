@@ -10,6 +10,8 @@ namespace Hexagonal
     {
         private static RandomGenerator instance;
         private static readonly Random RANDOM = new Random();
+        private static readonly int CACHE_SIZE = 250;
+        private List<int> cache = new List<int>();
 
         private RandomGenerator()
         {
@@ -35,11 +37,17 @@ namespace Hexagonal
         {
             try
             {
-                int[] numbers = GetRandomInts(1, 6, dices);
-                int result = 0;
-                foreach (int element in numbers)
+                if (cache.Count < dices)
                 {
-                    result += element;
+                    Console.WriteLine("Fetching new really random dice results");
+                    cache = GetRandomInts(1, 6, CACHE_SIZE);
+
+                }
+                int result = 0;
+                for (int i = dices; i > 0; i--)
+                {
+                    result += cache[0];
+                    cache.RemoveAt(0);
                 }
                 return result;
             }
@@ -63,42 +71,31 @@ namespace Hexagonal
 
 
         //Returns an array of random integers between two numbers, both inclusive        
-        private int[] GetRandomInts(int min, int max, int count)
+        private List<int> GetRandomInts(int min, int max, int count)
         {
             //Build the url string to www.random.org
             string url = "http://www.random.org/integers/?num=" + count.ToString();
 
             url += "&min=" + min.ToString();
             url += "&max=" + max.ToString();
-            url += "&col=1&base=10&format=html&rnd=new";
+            url += "&col=1&base=10&format=plain&rnd=new";
 
             string data = DownloadData(url);
 
             if (data != string.Empty)
             {
-                //Parse the data (data is HTML code of the result site)
-                string startMarker = "<pre class=" + '"' + "data" + '"' + ">"; //<pre class="data">
-                int j = data.IndexOf(startMarker);
-                if (j != -1)
+                string intString = data.Trim();
+
+                //Read each line
+                List<int> integers = new List<int>();
+                StringReader readLines = new StringReader(intString);
+
+                while (readLines.Peek() != -1)
                 {
-                    int k = data.IndexOf("</pre>", j);
-                    if (k != -1)
-                    {
-                        string intString = data.Substring(j + startMarker.Length, k - j - startMarker.Length);
-                        intString = intString.Trim();
-
-                        //Read each line
-                        List<int> integers = new List<int>();
-                        StringReader readLines = new StringReader(intString);
-
-                        while (readLines.Peek() != -1)
-                        {
-                            integers.Add(int.Parse(readLines.ReadLine()));
-                        }
-
-                        return integers.ToArray();
-                    }
+                    integers.Add(int.Parse(readLines.ReadLine()));
                 }
+
+                return integers;
             }
 
             throw new Exception("No internet connection!");

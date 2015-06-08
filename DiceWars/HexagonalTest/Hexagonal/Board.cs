@@ -173,6 +173,9 @@ namespace Hexagonal
                 }
             }
             Math.Shuffle<int>(fieldHelper);
+            
+            //Preload some dice results
+            RandomGenerator.getInstance().initialize();
 
 			//
 			// Calculate pixel info..remove?
