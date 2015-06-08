@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Hexagonal
 {
-	public class Hex
+	public class Hex : Subject
 	{
 		private System.Drawing.PointF[] points;
 		private float side;
@@ -24,6 +24,7 @@ namespace Hexagonal
 		private HexState hexState;
         private int dices;
         private bool exhausted;
+        private DiceLabels diceLabels;
 	
         /// <summary>
         /// Constructor to initalize the Hexagon with the fixed values
@@ -41,7 +42,6 @@ namespace Hexagonal
             this.hexState = new HexState(playerColor);
             this.dices = dices;
             
-
             //The IsNeigbour relys on the gridPosition
             if (orientation == Hexagonal.HexOrientation.Pointy) {
                 this.gridPosX = posX;
@@ -228,7 +228,7 @@ namespace Hexagonal
             set
             {
                 dices = value;
-                DiceLabels.GetInstance.update(this);
+                this.Notify();
             }
         }
 

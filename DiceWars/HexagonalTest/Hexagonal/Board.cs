@@ -31,6 +31,7 @@ namespace Hexagonal
         private static readonly int MAX_DICE = 9;
         private static readonly Random RANDOM = new Random();
         private List<int> fieldHelper;
+        private DiceLabels diceLabels;
 
 		#region Properties
 
@@ -155,6 +156,7 @@ namespace Hexagonal
             this.players = players;
 			hexes = new Hex[height, width]; //opposite of what we'd expect
 
+            diceLabels = DiceLabels.GetInstance() ;
             textPosX = new int[height, width]; // MaHa
             textPosY = new int[height, width]; // MaHa
 
@@ -221,6 +223,8 @@ namespace Hexagonal
                     player.addField();
                     player.Dices += 1;
                     Hex current = new Hex(side, orientation, player.Color, j, i, 1);
+                    current.Attach(DiceLabels.GetInstance());
+
                     f++;
 					// Set position booleans
 					#region Position Booleans
@@ -476,7 +480,7 @@ namespace Hexagonal
             if (from == null || !from.IsNeighbor(to) || from.Exhausted)
             {
                 Console.WriteLine("Move of units not possible");
-                DiceLabels.GetInstance.changeGameLabel(from.HexState.BackgroundColor, "Can't move");
+                diceLabels.changeGameLabel(to.HexState.BackgroundColor, "Can't move");
                 return false;
             }
             if (from.Dices > 2)
@@ -491,7 +495,7 @@ namespace Hexagonal
                 to.Dices += transfer;
                 to.Exhausted = true;
 
-                DiceLabels.GetInstance.changeGameLabel(from.HexState.BackgroundColor, "Dices moved");
+                diceLabels.changeGameLabel(from.HexState.BackgroundColor, "Dices moved");
                 return false;
             }
             return true;
@@ -509,7 +513,7 @@ namespace Hexagonal
             if (attacker.Dices <= 1 || attacker.Exhausted) 
             {
                 Console.WriteLine("Attack not possible");
-                DiceLabels.GetInstance.changeGameLabel(attacker.HexState.BackgroundColor, "Not possibl");
+                diceLabels.changeGameLabel(attacker.HexState.BackgroundColor, "Not possibl");
                 return;
             }
             Player attackerP = findPlayerByColor(attacker.HexState.BackgroundColor);
@@ -518,7 +522,7 @@ namespace Hexagonal
             int defenderEyes = RandomGenerator.getInstance().rollTheDice(defender.Dices);
 
             //
-            DiceLabels.GetInstance.changeGameLabel(attackerP.Color, defenderP.Color, attackerEyes, defenderEyes);
+            diceLabels.changeGameLabel(attackerP.Color, defenderP.Color, attackerEyes, defenderEyes);
             //
 
             Console.WriteLine("Attacker Eyes:" + attackerEyes + " Defender Eyes:" + defenderEyes);
