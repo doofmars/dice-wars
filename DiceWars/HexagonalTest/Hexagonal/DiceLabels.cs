@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace Hexagonal
 {
-    class DiceLabels
+    public class DiceLabels : Observer
     {
         private DiceLabels() { }
         private static DiceLabels instance = null;
@@ -18,16 +18,15 @@ namespace Hexagonal
         private Label labelAttackerDices;
         private Label labelDefenderDices;
 
-        public static DiceLabels GetInstance
+        public static DiceLabels GetInstance()
         {
-           get
-           {
-              if (instance == null)
-              {
-                  instance = new DiceLabels();
-              }
-              return instance;
-           }
+            // Use 'Lazy initialization' 
+            if (instance == null)
+            {
+                instance = new DiceLabels();
+            }
+
+            return instance;
         }
 
         public void addLabels(Label[,] labels)
@@ -58,14 +57,14 @@ namespace Hexagonal
 
         }
 
-        public void update(Hex hex)
+        public override void Update(Subject s)
         {
-            if (labels == null) 
+            if (labels == null || !(s is Hex)) 
             { 
                 return; 
             }
-            labels[hex.GridPositionY, hex.GridPositionX].Text = hex.Dices.ToString();
-            labels[hex.GridPositionY, hex.GridPositionX].BackColor = hex.HexState.BackgroundColor;
+            labels[((Hex)s).GridPositionY, ((Hex)s).GridPositionX].Text = ((Hex)s).Dices.ToString();
+            labels[((Hex)s).GridPositionY, ((Hex)s).GridPositionX].BackColor = ((Hex)s).HexState.BackgroundColor;
         }
     }
 }

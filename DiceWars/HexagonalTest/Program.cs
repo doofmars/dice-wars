@@ -25,6 +25,7 @@ namespace HexagonalTest
             }
 			Console.WriteLine("Starting Form...");
             RandomGenerator.getInstance().initialize();
+
             System.Windows.Forms.Application.Run(new HexagonalTest.MainWIndow());            
 		}
 	}
