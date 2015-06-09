@@ -530,7 +530,7 @@ namespace Hexagonal
             //
 
             Console.WriteLine("Attacker Eyes:" + attackerEyes + " Defender Eyes:" + defenderEyes);
-            if (true)//attackerEyes > defenderEyes
+            if (attackerEyes > defenderEyes)//attackerEyes > defenderEyes
             {
                 Console.WriteLine("Attacker won");
                 defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
