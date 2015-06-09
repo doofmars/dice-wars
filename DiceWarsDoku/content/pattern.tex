@@ -1,6 +1,6 @@
 \chapter{Verwendete Design-Pattern}  
 
-RandomGenerator (Singleton)\\ \\
+RandomGenerator (Singleton)\\ 
 
 Den Zufallsgenerator, der wahre Zufallszahlen mit Hilfe von der Random.org API generiert, 
 haben wir als Singleton implementiert. Von dem RandomGenerator soll es nur eine Instanz geben. 
@@ -8,4 +8,32 @@ Man ruft von außen nur die Methode "rollTheDice" auf (diese generiert dann,
 je nachdem ob man eine Internetverbindung hat oder nicht, 
 richtige oder Pseudo-Zufallszahlen und gibt deren Summe zurück). 
 Mehrere Instanzen eines RandomGenerators anzulegen wäre daher nicht sinnvoll, 
-da die Methode "rollTheDice" nie mehrmals parallel aufgerufen werden muss.
+da die Methode "rollTheDice" nie mehrmals parallel aufgerufen werden muss.\\ \\
+
+Builder-Pattern\\ 
+
+Das Builder-Pattern wird bei uns verwendet um das Spielfeld zu erzeugen. Wir
+verwenden zweimal das Pattern. Einmal wie erwähnt für das "Board" und einmal
+für das "BoardState". Das Builder-Pattern ist dafür da, um die Erstellung
+komplexer Objekte zu vereinfachen.\\ \\
+
+DTO-Pattern\\ 
+
+Das DTO-Pattern verwenden wir um Daten zu sammeln und diese dann in die
+Datenbank zu speichern. So sammeln wir an verschiedenen Stellen im Code Daten
+und in der letzten Form speichern wir diese in die Datenbank.\\
+Das DTO-Pattern ist dafür da, primitive Datentypen abzuspeichern bzw.
+einzusammeln.
+
+\newpage
+Observer-Pattern\\
+
+Da wir auf dem Spielfeld die Würfelanzal anzeigen und diese sich ständig ändert,
+haben wir hier das Observer-Pattern implementiert. Nachdem jeder Spieler seine
+Züge gemacht hat, werden Würfel neu vergeben bzw. auf die Vorhandenen addiert.
+Jetzt muss die GUI und alle dazugehörigen Objekte aktualisiert werden.\\ 
+Durch die Observer-Funktionalität lassen sich solche Probleme leicht lösen.\\ \\
+
+Somit haben wir vier Design-Pattern implementiert. (Gefordert waren hier drei
+Pattern)
+
