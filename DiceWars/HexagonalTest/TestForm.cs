@@ -19,11 +19,15 @@ namespace HexagonalTest
 		GraphicsEngine graphicsEngine;
         private Label[,] labels;
         int sizeOfField;
+        public DTOClass transferObject;
+       
 
-		public Fight(Board x, int size)
+		public Fight(Board x, int size, DTOClass data)
 		{
             board = x;
             sizeOfField = size;
+            this.transferObject = data;
+
 			InitializeComponent(sizeOfField);
 
             startGame();

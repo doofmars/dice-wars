@@ -10,25 +10,43 @@ namespace HexagonalTest
 {
     public partial class WinnerName : Form
     {
-        public WinnerName()
+        private HexagonalTest.DTOClass dataTransferObject;
+        public WinnerName(HexagonalTest.DTOClass data)
         {
+            this.dataTransferObject = data;
             InitializeComponent();
         }
 
         private void buttonSaveName_Click(object sender, EventArgs e)
         {
-            
-            if (String.IsNullOrEmpty(textBoxWinnerName.Text))
-            {
-                 System.Windows.Forms.MessageBox.Show("Enter a name!");
 
+            string inputName = textBoxWinnerName.Text.ToString();
+
+            if (String.IsNullOrEmpty(inputName))
+            {
+                dataTransferObject.setName("anonymous");
             }
             else
             {
-                //TODOOOO 
-                //Fill the database with name, time, enemys, size of board
-               
+                //set the winnername to the DTO Object
+                dataTransferObject.setName(textBoxWinnerName.Text.ToString());
+                
             }
+                
+
+                //Save the data in the database and close the db connection
+                HexagonalTest.Datenbank.SqliteDatabase dbHandler = new Datenbank.SqliteDatabase();
+                dbHandler.connectDB();
+                dbHandler.writeData(dataTransferObject.getName(), dataTransferObject.getTime(), dataTransferObject.getEnemyCount(), dataTransferObject.getFieldSize());
+                dbHandler.closeDatabase();
+
+                //restart the Application
+                Application.Exit();
+                System.Diagnostics.Process.Start( Application.ExecutablePath); // to start new instance of application
+                
+
+
+            
         }
     }
 }

@@ -18,6 +18,8 @@ namespace Hexagonal
 		private int xOffset;
 		private int yOffset;
 		private int side;
+        private HexagonalTest.DTOClass transferObject;
+        private HexagonalTest.Fight fightForm;
 		private Hexagonal.HexOrientation orientation;
 		private System.Drawing.Color backgroundColor;
 		private Hexagonal.BoardState boardState;
@@ -143,11 +145,13 @@ namespace Hexagonal
         /// <param name="orientation">Orientation of the hexagons</param>
         /// <param name="xOffset">X coordinate offset</param>
         /// <param name="yOffset">Y coordinate offset</param>
-        public Board(int width, int height, int side, Hexagonal.HexOrientation orientation, int xOffset, int yOffset, BoardState boardState, ArrayList players)
+        public Board(int width, int height, int side, Hexagonal.HexOrientation orientation, int xOffset, int yOffset, BoardState boardState, ArrayList players, HexagonalTest.DTOClass dataTransfer)
 		{                                                    
 			this.width = width;                              
 			this.height = height;                            
-			this.side = side;                                
+			this.side = side;
+            this.transferObject = dataTransfer;
+               
 			this.orientation = orientation;                  
 			this.xOffset = xOffset;
 			this.yOffset = yOffset;
@@ -519,7 +523,7 @@ namespace Hexagonal
             //
 
             Console.WriteLine("Attacker Eyes:" + attackerEyes + " Defender Eyes:" + defenderEyes);
-            if (attackerEyes > defenderEyes)
+            if (true)//attackerEyes > defenderEyes
             {
                 Console.WriteLine("Attacker won");
                 defender.HexState.BackgroundColor = attacker.HexState.BackgroundColor;
@@ -547,8 +551,10 @@ namespace Hexagonal
             {
                 //Triggered if player has won
                 Console.WriteLine(attackerP.Color.Name + " has won.");
-                HexagonalTest.GameOver gameOverForm = new HexagonalTest.GameOver(attackerP.Color.Name);
+                HexagonalTest.GameOver gameOverForm = new HexagonalTest.GameOver(attackerP.Color.Name, transferObject);
                 gameOverForm.Show();
+                
+                
             }
         }
 

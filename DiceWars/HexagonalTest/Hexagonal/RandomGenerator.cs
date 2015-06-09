@@ -45,6 +45,7 @@ namespace Hexagonal
             }
             catch (Exception e)
             {
+                Console.WriteLine(e.ToString());
                 return rollTheDiceOffline(dices);
             }
         }

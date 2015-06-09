@@ -32,12 +32,17 @@ namespace HexagonalTest
                 //normal way
             else
             {
+
+                DTOClass transferObject = new DTOClass();
+                
                 Hexagonal.BoardState state = new Hexagonal.Builder.BoardStateBuilder()
                .withGridPenWidth(2)
                .withActiveHexBorderColor(Color.Red)
                .withActiveGridPenWidth(2)
                .build();
 
+                
+                
                 this.board = new Hexagonal.Builder.BoardBuilder()
                     .witHeight(sizeOfBoard)
                     .withWidht(sizeOfBoard)
@@ -45,11 +50,19 @@ namespace HexagonalTest
                     .withPlayer(numberOfPlayers)
                     .withOrientation(Hexagonal.HexOrientation.Pointy)
                     .withBoardState(state)
+                    .withDataTransfer(transferObject)
                     .build();
 
+                HexagonalTest.Fight gameForm = new HexagonalTest.Fight(board, sizeOfBoard, transferObject);
+                
 
-                HexagonalTest.Fight gameForm = new HexagonalTest.Fight(board,sizeOfBoard);
-
+                //prepare the DTO Object for the database
+                //set the fieldsize and the enemycounter and start the playtimer
+                transferObject.setEnemyCount(numberOfPlayers);
+                transferObject.setFieldSize(comboBoxSize.GetItemText(comboBoxSize.SelectedItem));
+                transferObject.startTimerGo();
+               
+                //Start the FightForm
                 gameForm.Show();
 
                 this.Hide();
@@ -58,11 +71,9 @@ namespace HexagonalTest
         }
 
         private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
-        {
-          
+        {       
             numberOfPlayers = comboBoxPlayer.SelectedIndex;
             numberOfPlayers += 2;
-            //MessageBox.Show(numberOfPlayers.ToString());
         }
 
         private void comboBoxSize_SelectedIndexChanged(object sender, EventArgs e)

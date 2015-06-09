@@ -10,16 +10,21 @@ namespace HexagonalTest
 {
     public partial class GameOver : Form
     {
-      
-        public GameOver(string nameOfPlayer)
+
+        private HexagonalTest.DTOClass transferObject;
+        public GameOver(string nameOfPlayer, DTOClass data)
         {
+            this.transferObject = data;
             InitializeComponent(nameOfPlayer);
+            
+            //Stop the timer and save the time
+            transferObject.stopTimer();
         }
 
         private void buttonContinue_Click(object sender, EventArgs e)
         {
             
-            HexagonalTest.WinnerName winForm = new HexagonalTest.WinnerName();
+            HexagonalTest.WinnerName winForm = new HexagonalTest.WinnerName( transferObject );
             winForm.Show();
             this.Close();
 

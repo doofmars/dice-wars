@@ -47,6 +47,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Datenbank\SqliteDatabase.cs" />
+    <Compile Include="Datenbank\DTOClass.cs" />
     <Compile Include="GameOver.cs">
       <SubType>Form</SubType>
     </Compile>

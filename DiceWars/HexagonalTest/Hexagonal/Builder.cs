@@ -14,6 +14,8 @@ namespace Hexagonal
             private int width;
             private int height;
             private int side;
+            private HexagonalTest.DTOClass dataTransfer;
+   
             //Optional
             private int player = 2;
             private HexOrientation orientation = HexOrientation.Pointy;
@@ -85,6 +87,12 @@ namespace Hexagonal
                 this.boardState = boardState;
                 return this;
             }
+            public BoardBuilder withDataTransfer(HexagonalTest.DTOClass data)
+            {
+                this.dataTransfer = data;
+                return this;
+            }
+          
 
             public Board build()
             {
@@ -98,7 +106,7 @@ namespace Hexagonal
                     players.Add(new Player(i, PlayerColors.colors[i]));
                 }
                 this.boardState.ActivePlayer = 0;
-                return new Board(this.width, this.height, this.side, this.orientation, this.xOffset, this.yOffset, this.boardState, players);
+                return new Board(this.width, this.height, this.side, this.orientation, this.xOffset, this.yOffset, this.boardState, players, this.dataTransfer);
             }
         }
 
